@@ -1,64 +1,235 @@
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import CopyEmail from "../components/CopyEmail";
-import { email, links, roles } from "../data";
+import Magnetic from "../components/Magnetic";
+import MotionField from "../components/MotionField";
+import {
+  ContainerAnimated,
+  ContainerInset,
+  ContainerScroll,
+  ContainerSticky,
+  HeroButton,
+  HeroVideo,
+} from "@/components/blocks/animated-video-on-scroll";
+import { ChromaticLensEffect } from "@/components/ui/chromatic-lens";
+import { Globe } from "@/components/ui/globe";
+import { MorphingText } from "@/components/ui/morphing-text";
+import { SocialLinks } from "@/components/ui/social-links";
+import { launchBalloons } from "@/components/ui/balloons";
+import { email, roles, socials } from "../data";
+import {
+  gsap,
+  prefersReducedMotion,
+  registerMotion,
+  SplitText,
+} from "../motion/setup";
+
+registerMotion();
 
 export default function Home() {
+  const root = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+      const title = root.current?.querySelector(".hero-title");
+      const photo = root.current?.querySelector(".hero-photo img");
+      const photoWrap = root.current?.querySelector(".hero-photo-frame");
+      const tiles = root.current?.querySelectorAll(".tile-grid li");
+      const quote = root.current?.querySelector(".quote-band blockquote");
+      const hero = root.current?.querySelector(".hero");
+      if (!title) return;
+
+      const split = SplitText.create(title, {
+        type: "chars,words",
+        charsClass: "char",
+        wordsClass: "word",
+        tag: "span",
+      });
+      gsap.set(split.chars, { transformOrigin: "50% 100%" });
+      gsap.from(split.chars, {
+        opacity: 0,
+        y: 36,
+        rotateX: -55,
+        duration: 0.72,
+        stagger: 0.02,
+        ease: "expo.out",
+      });
+
+      if (photo && hero && photoWrap) {
+        gsap.from(photoWrap, {
+          clipPath: "inset(10% 9% 14% 9% round 28px)",
+          duration: 1.2,
+          ease: "expo.out",
+        });
+        gsap.from(photo, {
+          scale: 1.16,
+          y: 36,
+          duration: 1.25,
+          ease: "expo.out",
+        });
+        gsap.to(photo, {
+          yPercent: -9,
+          ease: "none",
+          scrollTrigger: {
+            trigger: hero,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.7,
+          },
+        });
+      }
+
+      if (tiles?.length) {
+        gsap.from(tiles, {
+          opacity: 0,
+          y: 22,
+          scale: 0.94,
+          duration: 0.5,
+          stagger: { each: 0.055, from: "start" },
+          ease: "back.out(1.4)",
+          scrollTrigger: {
+            trigger: ".tile-grid",
+            start: "top 82%",
+          },
+        });
+      }
+
+      let quoteSplit: SplitText | undefined;
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 861px)", () => {
+        if (!quote) return;
+        quoteSplit = SplitText.create(quote, {
+          type: "words",
+          wordsClass: "word",
+          tag: "span",
+        });
+        gsap.from(quoteSplit.words, {
+          opacity: 0.14,
+          y: 18,
+          duration: 0.4,
+          stagger: 0.045,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".quote-band",
+            start: "top 68%",
+            end: "+=85%",
+            scrub: 1,
+            pin: true,
+            id: "home-pin",
+          },
+        });
+      });
+
+      return () => {
+        split.revert();
+        quoteSplit?.revert();
+        mm.revert();
+      };
+    },
+    { scope: root },
+  );
+
   return (
-    <>
-      <section className="masthead">
-        <p className="eyebrow">Briefing · 2026</p>
-        <h1>
-          Student leader
-          <span>who builds the room.</span>
-        </h1>
-        <p className="lede">
-          I am Jules Kitto-Astrop. I organize youth diplomacy experiences,
-          manage complex operations, and build practical digital systems that
-          help teams deliver with clarity.
-        </p>
-        <p className="meta-line">Relocating from Bangkok · currently in Cambodia</p>
-        <div className="hero-actions">
-          <Link className="btn btn-primary" to="/experience">
-            See experience
-          </Link>
-          <Link className="btn btn-ghost" to="/about">
-            Read my story
-          </Link>
+    <div ref={root}>
+      <section className="hero">
+        <MotionField />
+        <div className="hero-copy">
+          <p className="eyebrow">Phnom Penh · New Zealander</p>
+          <h1 className="hero-title">Jules Kitto-Astrop</h1>
+          <div className="hero-sub">
+            <span className="sr-only">
+              Student leader. Event coordinator. Digital builder.
+            </span>
+            <MorphingText
+              className="hero-morph"
+              texts={[
+                "Student leader",
+                "Event coordinator",
+                "Digital builder",
+              ]}
+            />
+          </div>
+          <p className="lede">
+            I organize youth diplomacy experiences, manage complex operations, and
+            build practical digital systems that help teams deliver with clarity.
+          </p>
+          <p className="meta-line">Relocating from Bangkok · currently in Cambodia</p>
+          <div className="hero-actions">
+            <Magnetic>
+              <Link className="btn btn-primary" to="/experience">
+                See experience
+              </Link>
+            </Magnetic>
+            <Link className="btn btn-ghost" to="/about">
+              Read my story
+            </Link>
+          </div>
+        </div>
+        <figure className="hero-photo">
+          <div className="hero-photo-frame">
+            <img
+              src="/images/profile-photo.png"
+              alt="Jules Kitto-Astrop speaking at a conference, microphone on the desk"
+            />
+            <div className="hero-lens" aria-hidden="true">
+              <ChromaticLensEffect
+                image={{ src: "/images/profile-photo.png" }}
+                width="100%"
+                height="100%"
+                cursorStyle="crosshair"
+              />
+            </div>
+          </div>
+          <figcaption>
+            Speaking at the VFRI International Leadership Program, UNCC Bangkok.
+            Move the cursor over the photo.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section className="band">
+        <div className="band-inner">
+          <h2>Roles</h2>
+          <ul className="tile-grid" aria-label="Recorded roles">
+            {roles.map((role) => (
+              <li key={`${role.title}-${role.org}`}>
+                <strong>{role.title}</strong>
+                <span>{role.org}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      <ol className="badge-row" aria-label="Recorded roles">
-        {roles.map((role, i) => (
-          <li
-            key={`${role.title}-${role.org}`}
-            className={`badge-ticket rot-${(i % 5) + 1}`}
-          >
-            <strong>{role.title}</strong>
-            <span>{role.org}</span>
-          </li>
-        ))}
-      </ol>
+      <section className="quote-band">
+        <blockquote>
+          Less about collecting stamps. More about making rooms that actually
+          function.
+        </blockquote>
+      </section>
 
-      <blockquote className="pull-quote">
-        Less about collecting stamps. More about making rooms that actually
-        function.
-      </blockquote>
-
-      <section className="split-uneven">
-        <article className="paper paper-wide">
-          <p className="chapter-label">01 — Path</p>
+      <section className="globe-band" data-reveal>
+        <div className="globe-copy">
           <h2>Seven countries, one through-line</h2>
           <p>
             Lived and studied across Asia, Europe, Oceania, and North America.
             Conferences, teams, and websites have to hold up after the novelty
-            of a new city wears off.
+            of a new city wears off. Drag the globe — markers sit on the cities
+            in the moving order.
           </p>
           <Link className="text-link" to="/about">
             Follow the route
           </Link>
-        </article>
-        <aside className="paper paper-narrow paper-shift">
-          <p className="chapter-label">02 — Proof</p>
+        </div>
+        <div className="globe-stage">
+          <Globe className="top-10" />
+        </div>
+      </section>
+
+      <section className="band" data-reveal>
+        <article className="highlight-card">
           <h2>Highlights</h2>
           <p>
             Multiple MUN awards, plus two VERSO Hack recognitions for practical
@@ -67,28 +238,59 @@ export default function Home() {
           <Link className="text-link" to="/experience">
             See the full list
           </Link>
-        </aside>
+        </article>
       </section>
 
-      <section className="connect-band">
+      <section className="video-scroll" aria-label="Conference rooms in motion">
+        <ContainerScroll className="video-scroll-track">
+          <ContainerSticky className="video-scroll-sticky">
+            <ContainerAnimated className="video-scroll-copy">
+              <p className="eyebrow">Youth diplomacy, in motion</p>
+              <h2>The rooms still have to work</h2>
+              <p>
+                Conferences only land when logistics, people, and timing hold
+                together. Scroll and the footage keeps pace.
+              </p>
+            </ContainerAnimated>
+            <ContainerInset className="video-scroll-frame">
+              <HeroVideo
+                src="https://videos.pexels.com/video-files/8566672/8566672-uhd_2560_1440_30fps.mp4"
+                aria-label="Conference hall filling with people"
+              />
+            </ContainerInset>
+            <ContainerAnimated
+              inputRange={[0, 0.7]}
+              outputRange={[-80, 0]}
+              className="video-scroll-cta"
+            >
+              <Link to="/experience">
+                <HeroButton>See experience</HeroButton>
+              </Link>
+            </ContainerAnimated>
+          </ContainerSticky>
+        </ContainerScroll>
+      </section>
+
+      <section className="cta-band" data-reveal>
         <h2>Let’s work on something that has to land.</h2>
         <p>
           I am open to leadership opportunities, conference partnerships, and
           youth-focused collaborations.
         </p>
-        <div className="connect-links">
-          <a className="btn btn-primary" href={`mailto:${email}`}>
-            Write to Jules
-          </a>
+        <div className="hero-actions">
+          <Magnetic>
+            <a
+              className="btn btn-primary"
+              href={`mailto:${email}`}
+              onClick={() => launchBalloons()}
+            >
+              Write to Jules
+            </a>
+          </Magnetic>
           <CopyEmail />
-          <a href={links.linkedin} target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
-          <a href={links.seamun} target="_blank" rel="noreferrer">
-            seamun.com
-          </a>
         </div>
+        <SocialLinks socials={socials} className="pt-16 flex-wrap" />
       </section>
-    </>
+    </div>
   );
 }

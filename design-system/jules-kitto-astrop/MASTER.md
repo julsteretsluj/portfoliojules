@@ -1,26 +1,23 @@
 # Jules Kitto-Astrop — Design System
 
-Updated 2026-08-17 after a full visual redesign.
+Apple-inspired product UI (2026-08-17).
 
 ## Direction
 
-**Briefing folder on a sky desk.** Sticky identity rail + cream paper sheet. Style mix: exaggerated-minimal type, Swiss numbering, editorial pull quotes. Not the previous top-nav magazine layout.
+Apple marketing + HIG on the web: frosted nav, SF-style system type, Apple blue CTAs, light gray canvas, large rounded photography, quiet tiles. Liquid Glass used only on navigation (`backdrop-filter`), with an opaque fallback for reduced transparency.
 
-## Constraints that stay
+## Tokens
 
-- Canvas `#DFF2FC`
-- Clash Display + Satoshi
-- Terracotta CTA `#B55242` (not dataset pink/blue)
-- Radius ~10–16px, motion 350–420ms
-- Phosphor icons, visible focus, reduced-motion
+- Background: `#F5F5F7`
+- Surface: `#FFFFFF`
+- Text: `#1D1D1F` / muted `#6E6E73`
+- Accent: `#0071E3`
+- Hero atmosphere: photo + optional `#DFF2FC` not required on every surface
+- Type: `-apple-system, BlinkMacSystemFont, SF Pro`
+- Radius: 18px tiles, 28px hero image
+- Motion: ~220ms
 
-## Layout
+## Do not
 
-- Desktop: 250px rail (photo, numbered nav, email) + paper sheet
-- Mobile: compact bar + menu; photo hides (still in about/home context via rail on desktop)
-- Roles as dashed name-badge tickets, slightly rotated
-- Oversized masthead: “Student leader / who builds the room.”
-
-## Anti-patterns
-
-No emoji icons, no even card grids, no AI pink gradients, no sticky header covering focus.
+- Rotated tickets, paper clips, numbered side rails, terracotta, Clash Display
+- Emoji as icons, neon, heavy shadows

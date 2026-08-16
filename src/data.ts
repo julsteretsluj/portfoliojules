@@ -9,6 +9,33 @@ export const links = {
   intermun: "https://intermun.site",
 };
 
+export const socials = [
+  {
+    name: "LinkedIn",
+    href: links.linkedin,
+    image:
+      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=256&h=256&q=80",
+  },
+  {
+    name: "Instagram",
+    href: links.instagramPersonal,
+    image:
+      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=256&h=256&q=80",
+  },
+  {
+    name: "SEAMUNs",
+    href: links.instagramSeamuns,
+    image:
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=256&h=256&q=80",
+  },
+  {
+    name: "SEAMUN",
+    href: links.seamun,
+    image:
+      "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=256&h=256&q=80",
+  },
+];
+
 export const nav = [
   { to: "/", label: "Home" },
   { to: "/experience", label: "Experience" },
@@ -193,6 +220,16 @@ export const journey = [
   { place: "Amsterdam", country: "Netherlands", note: "again" },
   { place: "Bangkok", country: "Thailand", note: "again" },
   { place: "Phnom Penh", country: "Cambodia", current: true },
+];
+
+export const globeMarkers: { location: [number, number]; size: number }[] = [
+  { location: [35.6762, 139.6503], size: 0.05 },
+  { location: [43.6532, -79.3832], size: 0.06 },
+  { location: [-36.8485, 174.7633], size: 0.06 },
+  { location: [10.8231, 106.6297], size: 0.05 },
+  { location: [52.3676, 4.9041], size: 0.06 },
+  { location: [13.7563, 100.5018], size: 0.08 },
+  { location: [11.5564, 104.9282], size: 0.12 },
 ];
 
 export const passport = [

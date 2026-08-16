@@ -1,4 +1,10 @@
+import { ThreeDPhotoCarousel } from "@/components/ui/3d-carousel";
 import { companions, legoSets, snackles } from "../data";
+
+const carouselImages = [
+  ...companions.map((friend) => ({ src: friend.img, alt: friend.alt })),
+  ...snackles.map((item) => ({ src: item.img, alt: item.alt })),
+];
 
 export default function Esa() {
   return (
@@ -12,6 +18,13 @@ export default function Esa() {
           conferences, events, and academic work.
         </p>
       </header>
+
+      <section className="carousel-band" aria-label="Companion photos">
+        <p className="eyebrow">Drag to spin · click to open</p>
+        <div className="carousel-frame">
+          <ThreeDPhotoCarousel images={carouselImages} />
+        </div>
+      </section>
 
       <section className="companion-board">
         {companions.map((friend, i) => (

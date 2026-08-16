@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Envelope, List, X } from "@phosphor-icons/react";
+import { List, X } from "@phosphor-icons/react";
 import { NavLink } from "react-router-dom";
 import { email, nav } from "../data";
 
@@ -7,12 +7,26 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <aside className="rail">
-      <div className="rail-bar">
+    <header className="apple-nav">
+      <div className="apple-nav-inner">
         <NavLink to="/" className="wordmark" onClick={() => setOpen(false)}>
-          <span className="wordmark-name">Jules</span>
-          <span className="wordmark-rest">Kitto-Astrop</span>
+          Jules
         </NavLink>
+        <nav className={`site-nav ${open ? "is-open" : ""}`} id="site-nav" aria-label="Primary">
+          {nav.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === "/"}
+              onClick={() => setOpen(false)}
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+        <a className="btn btn-primary nav-cta" href={`mailto:${email}`}>
+          Send an email
+        </a>
         <button
           className="menu-btn"
           type="button"
@@ -21,42 +35,13 @@ export default function Header() {
           onClick={() => setOpen((v) => !v)}
         >
           {open ? (
-            <X size={18} weight="bold" aria-hidden="true" />
+            <X size={20} weight="bold" aria-hidden="true" />
           ) : (
-            <List size={18} weight="bold" aria-hidden="true" />
+            <List size={20} weight="bold" aria-hidden="true" />
           )}
-          {open ? "Close" : "Menu"}
+          <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
         </button>
       </div>
-
-      <figure className="rail-photo">
-        <img
-          src="/images/profile-photo.png"
-          alt="Jules Kitto-Astrop speaking at a conference"
-        />
-        <figcaption>VFRI ILP · UNCC Bangkok</figcaption>
-      </figure>
-
-      <p className="rail-place">Phnom Penh · New Zealander</p>
-
-      <nav className={`site-nav ${open ? "is-open" : ""}`} id="site-nav" aria-label="Primary">
-        {nav.map((item, i) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            end={item.to === "/"}
-            onClick={() => setOpen(false)}
-          >
-            <span className="nav-n">{String(i + 1).padStart(2, "0")}</span>
-            {item.label}
-          </NavLink>
-        ))}
-      </nav>
-
-      <a className="btn btn-primary rail-cta" href={`mailto:${email}`}>
-        <Envelope size={18} weight="bold" aria-hidden="true" />
-        Write to Jules
-      </a>
-    </aside>
+    </header>
   );
 }

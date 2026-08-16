@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
+import PageCurtain from "./PageCurtain";
+import ScrollReveal from "./ScrollReveal";
+import { Balloons } from "./ui/balloons";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -11,17 +14,18 @@ export default function Layout() {
   }, [pathname]);
 
   return (
-    <div className="frame">
+    <>
       <a className="skip" href="#main">
         Skip to content
       </a>
+      <PageCurtain />
+      <Balloons type="default" />
       <Header />
-      <div className="sheet">
-        <main id="main">
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
-    </div>
+      <main id="main">
+        <Outlet />
+        <ScrollReveal />
+      </main>
+      <Footer />
+    </>
   );
 }

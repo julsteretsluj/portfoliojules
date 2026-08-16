@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { launchBalloons } from "./ui/balloons";
 import { email } from "../data";
 
 export default function CopyEmail() {
@@ -8,6 +9,7 @@ export default function CopyEmail() {
     try {
       await navigator.clipboard.writeText(email);
       setCopied(true);
+      launchBalloons();
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
       setCopied(false);

@@ -1,3 +1,4 @@
+import { Globe } from "@/components/ui/globe";
 import { education, livedIn, journey, passport } from "../data";
 
 export default function About() {
@@ -24,14 +25,18 @@ export default function About() {
       </header>
 
       <section className="journey reveal from-left">
-        <div className="journey-intro">
-          <h2>Moving order</h2>
-          <p>
-            The living and study journey, in the order it actually happened.
-            Phnom Penh is home for now.
-          </p>
+        <div className="globe-stage journey-globe">
+          <Globe className="top-6" />
         </div>
-        <ol className="journey-path">
+        <div>
+          <div className="journey-intro">
+            <h2>Moving order</h2>
+            <p>
+              The living and study journey, in the order it actually happened.
+              Phnom Penh is home for now.
+            </p>
+          </div>
+          <ol className="journey-path">
           {journey.map((stop, i) => (
             <li key={`${stop.place}-${i}`} className={stop.current ? "is-current" : ""}>
               <span className="journey-n">{String(i + 1).padStart(2, "0")}</span>
@@ -43,7 +48,8 @@ export default function About() {
               </span>
             </li>
           ))}
-        </ol>
+          </ol>
+        </div>
       </section>
 
       <section className="lived-row reveal from-up">
