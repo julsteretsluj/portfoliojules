@@ -1,19 +1,12 @@
-import { Envelope } from "@phosphor-icons/react";
 import { email, links } from "../data";
 
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <div className="footer-copy">
-        <p className="footer-kicker">Open to leadership, partnerships, and youth-focused work</p>
-        <p>
-          Jules Kitto-Astrop · Phnom Penh ·{" "}
-          <a href={`mailto:${email}`}>
-            <Envelope size={16} weight="regular" aria-hidden="true" />
-            {email}
-          </a>
-        </p>
-      </div>
+      <p className="footer-kicker">Open to leadership, partnerships, and youth-focused work</p>
+      <p>
+        <a href={`mailto:${email}`}>{email}</a>
+      </p>
       <ul className="footer-links">
         <li>
           <a href={links.linkedin} target="_blank" rel="noreferrer">

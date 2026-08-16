@@ -11,18 +11,17 @@ export default function Layout() {
   }, [pathname]);
 
   return (
-    <>
+    <div className="frame">
       <a className="skip" href="#main">
         Skip to content
       </a>
-      <div className="bg-wash" aria-hidden="true" />
-      <div className="header-shell">
-        <Header />
+      <Header />
+      <div className="sheet">
+        <main id="main">
+          <Outlet />
+        </main>
+        <Footer />
       </div>
-      <main id="main">
-        <Outlet />
-      </main>
-      <Footer />
-    </>
+    </div>
   );
 }
