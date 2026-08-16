@@ -418,10 +418,42 @@ p {
 }
 
 .route-fallback {
-  max-width: 980px;
-  margin: 6rem auto;
-  padding: 0 1.5rem;
-  color: var(--muted);
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem;
+}
+
+.metamorphic-loader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  background: none;
+}
+
+.metamorphic-loader-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: metamorphic-spin 2s alternate infinite;
+}
+
+@keyframes metamorphic-spin {
+  0%,
+  20% {
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  90%,
+  100% {
+    border-radius: 5%;
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
 }
 
 .apple-nav {
@@ -585,10 +617,6 @@ main {
 .passport,
 .passion-masonry,
 .lego-aside-band,
-.carousel-band,
-.companion-board,
-.esa-notes,
-.collections,
 .now-columns,
 .notebook,
 .role-index,
@@ -727,15 +755,11 @@ main {
 .paper,
 .role-card,
 .skill-mini,
-.companion,
 .passion-card,
 .now-card,
 .ticket,
 .highlight-card,
 .note-card,
-.comfort-col,
-.lego-col,
-.snackles-col,
 .toolkit,
 .feature-role,
 .edu-node {
@@ -750,8 +774,7 @@ main {
   gap: 0.2rem;
 }
 
-.tile-grid span,
-.companion-fact {
+.tile-grid span {
   color: var(--muted);
 }
 
@@ -858,55 +881,6 @@ main {
 .cta-band {
   text-align: center;
   padding: 4.4rem 0 5rem;
-}
-
-.video-scroll {
-  margin: 0.75rem 0 0;
-  color: #f5f5f7;
-}
-
-.video-scroll-track {
-  height: 250vh;
-}
-
-.video-scroll-sticky {
-  background:
-    radial-gradient(42% 38% at 50% 12%, #3a7bd5 0%, #1d1d1f 58%, #111113 100%);
-  padding: 5.5rem 1.2rem 2.4rem;
-}
-
-.video-scroll-copy {
-  width: min(640px, calc(100% - 1rem));
-  text-align: center;
-  margin: 0 auto 0.4rem;
-}
-
-.video-scroll-copy h2 {
-  color: #f5f5f7;
-}
-
-.video-scroll-copy p {
-  color: #d2d2d7;
-}
-
-.video-scroll-copy .eyebrow {
-  color: #a1a1a6;
-}
-
-.video-scroll-frame {
-  width: min(920px, calc(100% - 1.2rem));
-  max-height: 450px;
-  aspect-ratio: 16 / 9;
-  margin: 0 auto;
-  background: #000;
-}
-
-.video-scroll-cta {
-  margin-top: 1.1rem;
-}
-
-.video-scroll-cta a {
-  text-decoration: none;
 }
 
 .cta-band .lede,
@@ -1273,117 +1247,6 @@ main {
   max-width: none;
 }
 
-.companion-board {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin: 0 auto 1.4rem;
-}
-
-.carousel-band {
-  margin: 0 auto 2.2rem;
-}
-
-.carousel-band .eyebrow {
-  text-align: center;
-}
-
-.carousel-frame {
-  min-height: 500px;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-}
-
-.companion {
-  background: var(--surface);
-  margin-top: 0;
-}
-
-.companion:nth-child(2),
-.companion:nth-child(4) {
-  margin-top: 0;
-}
-
-.companion img {
-  width: 100%;
-  height: 190px;
-  object-fit: contain;
-  background: var(--bg);
-  border-radius: 12px;
-  margin: 0.5rem 0 0.8rem;
-}
-
-.companion dl {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.4rem 0.8rem;
-  margin: 0.3rem 0 0.8rem;
-}
-
-.companion dt {
-  font-size: 0.72rem;
-  color: var(--muted);
-}
-
-.companion dd {
-  margin: 0;
-}
-
-.esa-notes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.6rem;
-  margin: 0 auto 2.2rem;
-}
-
-.collection-spread {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 0.75rem;
-  margin: 1rem 0;
-}
-
-.comfort-col,
-.lego-col,
-.snackles-col {
-  background: var(--surface);
-}
-
-.set-catalog {
-  list-style: none;
-  margin: 0.7rem 0 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-}
-
-.set-catalog li {
-  background: var(--bg);
-  font-size: 0.78rem;
-  padding: 0.2rem 0.45rem;
-  border-radius: 8px;
-  color: var(--muted);
-}
-
-.snackle-row {
-  list-style: none;
-  margin: 1rem 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.6rem;
-}
-
-.snackle-row img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 12px;
-  background: var(--bg);
-}
-
 .now-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1523,16 +1386,6 @@ main {
     display: none;
   }
 
-  .video-scroll-track {
-    height: auto;
-  }
-
-  .video-scroll-sticky {
-    position: relative;
-    height: auto;
-    padding-top: 3rem;
-  }
-
   .custom-animate-rotate,
   .custom-animate-lid-screen,
   .custom-animate-lid-macbody,
@@ -1545,6 +1398,10 @@ main {
 
   .macbook-inner {
     transform: rotateX(-20deg) rotateY(-18deg);
+  }
+
+  .metamorphic-loader-ring {
+    animation: none;
   }
 }
 
@@ -1586,10 +1443,6 @@ main {
     display: flex;
   }
 
-  .video-scroll-track {
-    height: 180vh;
-  }
-
   .tile-grid,
   .globe-band,
   .two-up,
@@ -1601,16 +1454,12 @@ main {
   .journey,
   .passport,
   .passion-masonry,
-  .companion-board,
-  .esa-notes,
-  .collection-spread,
   .now-columns,
   .role-index li {
     grid-template-columns: 1fr;
   }
 
-  .stamp-grid,
-  .snackle-row {
+  .stamp-grid {
     grid-template-columns: 1fr 1fr;
   }
 

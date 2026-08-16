@@ -4,14 +4,6 @@ import { useGSAP } from "@gsap/react";
 import CopyEmail from "../components/CopyEmail";
 import Magnetic from "../components/Magnetic";
 import MotionField from "../components/MotionField";
-import {
-  ContainerAnimated,
-  ContainerInset,
-  ContainerScroll,
-  ContainerSticky,
-  HeroButton,
-  HeroVideo,
-} from "@/components/blocks/animated-video-on-scroll";
 import { AppleHelloEnglishEffect } from "@/components/ui/apple-hello-effect";
 import { ChromaticLensEffect } from "@/components/ui/chromatic-lens";
 import { Globe } from "@/components/ui/globe";
@@ -174,7 +166,7 @@ export default function Home() {
           <div className="hero-photo-frame">
             <img
               src="/images/profile-photo.png"
-              alt="Jules Kitto-Astrop speaking at a conference, microphone on the desk"
+              alt="Jules Kitto-Astrop in a black blazer with a pounamu necklace, New Zealand flag behind"
             />
             <div className="hero-lens" aria-hidden="true">
               <ChromaticLensEffect
@@ -186,8 +178,8 @@ export default function Home() {
             </div>
           </div>
           <figcaption>
-            Speaking at the VFRI International Leadership Program, UNCC Bangkok.
-            Move the cursor over the photo.
+            New Zealander, currently in Phnom Penh. Move the cursor over the
+            photo.
           </figcaption>
         </figure>
       </section>
@@ -247,36 +239,6 @@ export default function Home() {
       <section className="text-color-band" data-reveal>
         <p className="eyebrow">How the work actually goes</p>
         <TextColor as="p" words={["Lead.", "Coordinate.", "Build."]} />
-      </section>
-
-      <section className="video-scroll" aria-label="Conference rooms in motion">
-        <ContainerScroll className="video-scroll-track">
-          <ContainerSticky className="video-scroll-sticky">
-            <ContainerAnimated className="video-scroll-copy">
-              <p className="eyebrow">Youth diplomacy, in motion</p>
-              <h2>The rooms still have to work</h2>
-              <p>
-                Conferences only land when logistics, people, and timing hold
-                together. Scroll and the footage keeps pace.
-              </p>
-            </ContainerAnimated>
-            <ContainerInset className="video-scroll-frame">
-              <HeroVideo
-                src="https://videos.pexels.com/video-files/8566672/8566672-uhd_2560_1440_30fps.mp4"
-                aria-label="Conference hall filling with people"
-              />
-            </ContainerInset>
-            <ContainerAnimated
-              inputRange={[0, 0.7]}
-              outputRange={[-80, 0]}
-              className="video-scroll-cta"
-            >
-              <Link to="/experience">
-                <HeroButton>See experience</HeroButton>
-              </Link>
-            </ContainerAnimated>
-          </ContainerSticky>
-        </ContainerScroll>
       </section>
 
       <section className="cta-band" data-reveal>
