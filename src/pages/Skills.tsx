@@ -1,4 +1,5 @@
-import { skills, toolkit, toolkitTags } from "../data";
+import { Macbook } from "@/components/ui/animated-3d-mac-book-air";
+import { links, skills, toolkit, toolkitTags } from "../data";
 
 export default function Skills() {
   const [lead, ...rest] = skills;
@@ -26,6 +27,34 @@ export default function Skills() {
               <p>{skill.body}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="macbook-band" data-reveal>
+        <div className="macbook-stage">
+          <Macbook />
+        </div>
+        <div className="macbook-copy">
+          <p className="eyebrow">Digital execution</p>
+          <h2>The sites still have to work after the room empties</h2>
+          <p>
+            Web development sits next to the logistics. Domain setup, pages, and
+            trackers are part of the same delivery stack as the conference
+            floor.
+          </p>
+          <p>
+            <a className="text-link" href={links.seamun} target="_blank" rel="noreferrer">
+              seamun.com
+            </a>
+            {" · "}
+            <a className="text-link" href={links.seamuns} target="_blank" rel="noreferrer">
+              seamuns.site
+            </a>
+            {" · "}
+            <a className="text-link" href={links.intermun} target="_blank" rel="noreferrer">
+              intermun.site
+            </a>
+          </p>
         </div>
       </section>
 

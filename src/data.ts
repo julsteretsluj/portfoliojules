@@ -46,6 +46,49 @@ export const nav = [
   { to: "/now", label: "Now" },
 ];
 
+export const dockApps = [
+  {
+    id: "/",
+    name: "Home",
+    icon: "https://cdn.jim-nielsen.com/macos/1024/finder-2021-09-10.png?rf=1024",
+  },
+  {
+    id: "/experience",
+    name: "Experience",
+    icon: "https://cdn.jim-nielsen.com/macos/1024/calendar-2021-04-29.png?rf=1024",
+  },
+  {
+    id: "/skills",
+    name: "Skills",
+    icon: "https://cdn.jim-nielsen.com/macos/1024/terminal-2021-06-03.png?rf=1024",
+  },
+  {
+    id: "/about",
+    name: "About",
+    icon: "https://cdn.jim-nielsen.com/macos/1024/safari-2021-06-02.png?rf=1024",
+  },
+  {
+    id: "/passions",
+    name: "Passions",
+    icon: "https://cdn.jim-nielsen.com/macos/1024/photos-2021-05-28.png?rf=1024",
+  },
+  {
+    id: "/esa",
+    name: "ESA",
+    icon: "https://cdn.jim-nielsen.com/macos/1024/music-2021-05-25.png?rf=1024",
+  },
+  {
+    id: "/now",
+    name: "Now",
+    icon: "https://cdn.jim-nielsen.com/macos/1024/notes-2021-05-25.png?rf=1024",
+  },
+  {
+    id: "mail",
+    name: "Mail",
+    icon: "https://cdn.jim-nielsen.com/macos/1024/mail-2021-05-25.png?rf=1024",
+  },
+];
+
 export type Role = {
   title: string;
   org: string;

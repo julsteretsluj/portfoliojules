@@ -12,6 +12,7 @@ import {
   HeroButton,
   HeroVideo,
 } from "@/components/blocks/animated-video-on-scroll";
+import { AppleHelloEnglishEffect } from "@/components/ui/apple-hello-effect";
 import { ChromaticLensEffect } from "@/components/ui/chromatic-lens";
 import { Globe } from "@/components/ui/globe";
 import { MorphingText } from "@/components/ui/morphing-text";
@@ -137,6 +138,7 @@ export default function Home() {
       <section className="hero">
         <MotionField />
         <div className="hero-copy">
+          <AppleHelloEnglishEffect speed={1.1} className="hero-hello" />
           <p className="eyebrow">Phnom Penh · New Zealander</p>
           <h1 className="hero-title">Jules Kitto-Astrop</h1>
           <div className="hero-sub">
