@@ -16,6 +16,7 @@ import { ChromaticLensEffect } from "@/components/ui/chromatic-lens";
 import { Globe } from "@/components/ui/globe";
 import { MorphingText } from "@/components/ui/morphing-text";
 import { SocialLinks } from "@/components/ui/social-links";
+import { TextColor } from "@/components/ui/text-color";
 import { launchBalloons } from "@/components/ui/balloons";
 import { email, roles, socials } from "../data";
 import {
@@ -239,6 +240,11 @@ export default function Home() {
             See the full list
           </Link>
         </article>
+      </section>
+
+      <section className="text-color-band" data-reveal>
+        <p className="eyebrow">How the work actually goes</p>
+        <TextColor as="p" words={["Lead.", "Coordinate.", "Build."]} />
       </section>
 
       <section className="video-scroll" aria-label="Conference rooms in motion">
