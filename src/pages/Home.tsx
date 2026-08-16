@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import CopyEmail from "../components/CopyEmail";
 import Magnetic from "../components/Magnetic";
 import MotionField from "../components/MotionField";
-import { AppleHelloEnglishEffect } from "@/components/ui/apple-hello-effect";
 import { ChromaticLensEffect } from "@/components/ui/chromatic-lens";
 import { Globe } from "@/components/ui/globe";
 import { MorphingText } from "@/components/ui/morphing-text";
@@ -23,6 +22,22 @@ registerMotion();
 
 export default function Home() {
   const root = useRef<HTMLDivElement>(null);
+  const cta = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = cta.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        launchBalloons();
+        io.disconnect();
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useGSAP(
     () => {
@@ -130,7 +145,6 @@ export default function Home() {
       <section className="hero">
         <MotionField />
         <div className="hero-copy">
-          <AppleHelloEnglishEffect speed={1.1} className="hero-hello" />
           <p className="eyebrow">Phnom Penh · New Zealander</p>
           <h1 className="hero-title">Jules Kitto-Astrop</h1>
           <div className="hero-sub">
@@ -241,7 +255,7 @@ export default function Home() {
         <TextColor as="p" words={["Lead.", "Coordinate.", "Build."]} />
       </section>
 
-      <section className="cta-band" data-reveal>
+      <section ref={cta} className="cta-band" data-reveal>
         <h2>Let’s work on something that has to land.</h2>
         <p>
           I am open to leadership opportunities, conference partnerships, and
@@ -252,14 +266,14 @@ export default function Home() {
             <a
               className="btn btn-primary"
               href={`mailto:${email}`}
-              onClick={() => launchBalloons()}
+              onPointerDown={() => launchBalloons()}
             >
               Write to Jules
             </a>
           </Magnetic>
           <CopyEmail />
         </div>
-        <SocialLinks socials={socials} className="pt-16 flex-wrap" />
+        <SocialLinks socials={socials} />
       </section>
     </div>
   );

@@ -13,26 +13,18 @@ export const socials = [
   {
     name: "LinkedIn",
     href: links.linkedin,
-    image:
-      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=256&h=256&q=80",
   },
   {
     name: "Instagram",
     href: links.instagramPersonal,
-    image:
-      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=256&h=256&q=80",
   },
   {
     name: "SEAMUNs",
     href: links.instagramSeamuns,
-    image:
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=256&h=256&q=80",
   },
   {
     name: "SEAMUN",
     href: links.seamun,
-    image:
-      "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=256&h=256&q=80",
   },
 ];
 

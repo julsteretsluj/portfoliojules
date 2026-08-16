@@ -16,10 +16,31 @@ export type BalloonsHandle = {
   launchAnimation: () => void;
 };
 
-let launcher: (() => void) | null = null;
+let lastLaunch = 0;
+
+function liftBalloonLayer() {
+  requestAnimationFrame(() => {
+    document.querySelectorAll("balloons").forEach((node) => {
+      const el = node as HTMLElement;
+      el.style.zIndex = "2147483646";
+      el.style.contain = "none";
+      if (el.parentElement === document.documentElement) {
+        document.body.appendChild(el);
+      }
+    });
+  });
+}
 
 export function launchBalloons() {
-  launcher?.();
+  if (typeof window === "undefined") return;
+  if (prefersReducedMotion()) return;
+
+  const now = performance.now();
+  if (now - lastLaunch < 700) return;
+  lastLaunch = now;
+
+  void balloons();
+  liftBalloonLayer();
 }
 
 const Balloons = React.forwardRef<BalloonsHandle, BalloonsProps>(
@@ -38,7 +59,7 @@ const Balloons = React.forwardRef<BalloonsHandle, BalloonsProps>(
       if (prefersReducedMotion()) return;
 
       if (type === "default") {
-        balloons();
+        launchBalloons();
       } else if (type === "text" && text) {
         textBalloons([
           {
@@ -55,13 +76,6 @@ const Balloons = React.forwardRef<BalloonsHandle, BalloonsProps>(
     React.useImperativeHandle(ref, () => ({ launchAnimation }), [
       launchAnimation,
     ]);
-
-    React.useEffect(() => {
-      launcher = launchAnimation;
-      return () => {
-        if (launcher === launchAnimation) launcher = null;
-      };
-    }, [launchAnimation]);
 
     return <div className={cn("balloons-container", className)} />;
   },

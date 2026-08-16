@@ -11,10 +11,7 @@ export default function Footer() {
         <a className="footer-email" href={`mailto:${email}`}>
           {email}
         </a>
-        <SocialLinks
-          socials={socials}
-          className="footer-socials flex-wrap justify-start pt-14"
-        />
+        <SocialLinks socials={socials} className="footer-socials" />
         <p className="footer-legal">
           Copyright © {new Date().getFullYear()} Jules Kitto-Astrop. All rights reserved.
         </p>

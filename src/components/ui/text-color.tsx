@@ -1,4 +1,3 @@
-import { Plus } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
 const DEFAULT_WORDS = ["Develop.", "Preview.", "Ship."] as const;
@@ -20,32 +19,8 @@ export function TextColor({
     <div className={cn("text-color", className)}>
       <div className="mb-10 mt-4 md:mt-6">
         <div className="px-2">
-          <div className="relative h-full w-full border border-slate-200 p-8 [mask-image:radial-gradient(200rem_24rem_at_center,white,transparent)] dark:border-slate-800">
+          <div className="relative h-full w-full p-8 [mask-image:radial-gradient(200rem_24rem_at_center,white,transparent)]">
             <Tag className="text-color-heading flex select-none flex-col px-3 py-2 text-center text-7xl font-extrabold leading-none tracking-tighter sm:text-8xl md:flex-col lg:flex-row">
-              <Plus
-                className="absolute -left-4 -top-4 h-8 w-8 text-indigo-500"
-                size={32}
-                weight="bold"
-                aria-hidden
-              />
-              <Plus
-                className="absolute -bottom-4 -left-4 h-8 w-8 text-indigo-500"
-                size={32}
-                weight="bold"
-                aria-hidden
-              />
-              <Plus
-                className="absolute -right-4 -top-4 h-8 w-8 text-indigo-500"
-                size={32}
-                weight="bold"
-                aria-hidden
-              />
-              <Plus
-                className="absolute -bottom-4 -right-4 h-8 w-8 text-indigo-500"
-                size={32}
-                weight="bold"
-                aria-hidden
-              />
               <span
                 data-content={first}
                 className="before:animate-gradient-background-1 relative before:absolute before:bottom-4 before:left-0 before:top-0 before:z-0 before:w-full before:px-2 before:content-[attr(data-content)] sm:before:top-0"

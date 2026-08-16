@@ -40,12 +40,14 @@ export default function About() {
           {journey.map((stop, i) => (
             <li key={`${stop.place}-${i}`} className={stop.current ? "is-current" : ""}>
               <span className="journey-n">{String(i + 1).padStart(2, "0")}</span>
-              <strong>{stop.place}</strong>
-              <span>
-                {stop.country}
-                {stop.note ? ` · ${stop.note}` : ""}
-                {stop.current ? " · current home" : ""}
-              </span>
+              <div className="journey-stop">
+                <strong>{stop.place}</strong>
+                <span>
+                  {stop.country}
+                  {stop.note ? ` · ${stop.note}` : ""}
+                  {stop.current ? " · current home" : ""}
+                </span>
+              </div>
             </li>
           ))}
           </ol>

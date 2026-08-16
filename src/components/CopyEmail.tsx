@@ -6,10 +6,10 @@ export default function CopyEmail() {
   const [copied, setCopied] = useState(false);
 
   async function copy() {
+    launchBalloons();
     try {
       await navigator.clipboard.writeText(email);
       setCopied(true);
-      launchBalloons();
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
       setCopied(false);

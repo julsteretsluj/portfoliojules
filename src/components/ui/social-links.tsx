@@ -1,12 +1,18 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  GlobeHemisphereEast,
+  InstagramLogo,
+  LinkedinLogo,
+  UsersThree,
+  type Icon,
+} from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
 interface Social {
   name: string;
-  image: string;
+  image?: string;
   href?: string;
 }
 
@@ -14,80 +20,34 @@ interface SocialLinksProps extends React.HTMLAttributes<HTMLDivElement> {
   socials: Social[];
 }
 
+const ICONS: Record<string, Icon> = {
+  LinkedIn: LinkedinLogo,
+  Instagram: InstagramLogo,
+  SEAMUNs: UsersThree,
+  SEAMUN: GlobeHemisphereEast,
+};
+
 export function SocialLinks({ socials, className, ...props }: SocialLinksProps) {
-  const [hoveredSocial, setHoveredSocial] = React.useState<string | null>(null);
-  const [rotation, setRotation] = React.useState<number>(0);
-  const [clicked, setClicked] = React.useState<boolean>(false);
-
-  const animation = {
-    scale: clicked ? [1, 1.3, 1] : 1,
-    transition: { duration: 0.3 },
-  };
-
-  React.useEffect(() => {
-    const handleClick = () => {
-      setClicked(true);
-      setTimeout(() => {
-        setClicked(false);
-      }, 200);
-    };
-    window.addEventListener("click", handleClick);
-    return () => window.removeEventListener("click", handleClick);
-  }, [clicked]);
-
   return (
-    <div
-      className={cn("flex items-center justify-center gap-0", className)}
-      {...props}
-    >
-      {socials.map((social, index) => (
-        <a
-          className={cn(
-            "relative cursor-pointer px-5 py-2 transition-opacity duration-200",
-            hoveredSocial && hoveredSocial !== social.name
-              ? "opacity-50"
-              : "opacity-100",
-          )}
-          key={index}
-          href={social.href}
-          target={social.href?.startsWith("http") ? "_blank" : undefined}
-          rel={social.href?.startsWith("http") ? "noreferrer" : undefined}
-          onMouseEnter={() => {
-            setHoveredSocial(social.name);
-            setRotation(Math.random() * 20 - 10);
-          }}
-          onMouseLeave={() => setHoveredSocial(null)}
-          onClick={() => {
-            setClicked(true);
-          }}
-        >
-          <span className="block text-lg font-medium">{social.name}</span>
-          <AnimatePresence>
-            {hoveredSocial === social.name && (
-              <motion.div
-                className="absolute bottom-0 left-0 right-0 flex h-full w-full items-center justify-center"
-                animate={animation}
-              >
-                <motion.img
-                  key={social.name}
-                  src={social.image}
-                  alt={social.name}
-                  className="size-16 rounded-xl object-cover shadow-md"
-                  initial={{
-                    y: -40,
-                    rotate: rotation,
-                    opacity: 0,
-                    filter: "blur(2px)",
-                  }}
-                  animate={{ y: -50, opacity: 1, filter: "blur(0px)" }}
-                  exit={{ y: -40, opacity: 0, filter: "blur(2px)" }}
-                  transition={{ duration: 0.2 }}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </a>
-      ))}
+    <div className={cn("social-links", className)} {...props}>
+      {socials.map((social) => {
+        const Icon = ICONS[social.name];
+
+        return (
+          <a
+            key={social.name}
+            className="social-link"
+            href={social.href}
+            target={social.href?.startsWith("http") ? "_blank" : undefined}
+            rel={social.href?.startsWith("http") ? "noreferrer" : undefined}
+          >
+            {Icon ? (
+              <Icon className="social-link-icon" size={22} weight="regular" aria-hidden />
+            ) : null}
+            <span>{social.name}</span>
+          </a>
+        );
+      })}
     </div>
   );
 }
