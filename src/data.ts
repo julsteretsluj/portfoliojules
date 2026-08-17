@@ -474,6 +474,11 @@ export const passportStamps: Record<
     alt: "Vintage Cambodian postage stamp of Angkor Wat",
     wide: true,
   },
+  Canada: {
+    src: "/images/stamp-canada.png",
+    alt: "Vintage Canadian postage stamp of a winter coastal scene",
+    wide: true,
+  },
 };
 
 export const passions = [
