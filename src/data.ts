@@ -67,7 +67,7 @@ export const dockApps = [
   {
     id: "/takes",
     name: "Takes",
-    icon: "https://cdn.jim-nielsen.com/macos/1024/textedit-2021-06-03.png?rf=1024",
+    icon: "https://cdn.jim-nielsen.com/macos/1024/voice-memos-2025-11-14.png?rf=1024",
   },
   {
     id: "/now",
