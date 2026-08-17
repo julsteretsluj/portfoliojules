@@ -559,6 +559,14 @@ export const passportStamps: Record<
     alt: "Thai postage stamp of a rubber plantation",
     wide: true,
   },
+  "United States": {
+    src: "/images/stamp-us.png",
+    alt: "Vintage United States postage stamp featuring an engraving portrait",
+  },
+  Vietnam: {
+    src: "/images/stamp-vietnam.png",
+    alt: "Vietnam postage stamp featuring a hoa trang flower and lotus pond scene",
+  },
 };
 
 export const passions = [
