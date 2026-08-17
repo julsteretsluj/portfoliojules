@@ -393,6 +393,27 @@ export const livedIn: LivedPlace[] = [
       },
     ],
   },
+  {
+    country: "Cambodia",
+    images: [
+      {
+        src: "/images/lived/cambodia-1.jpg",
+        alt: "Tuk-tuks and motorbikes on a Phnom Penh street",
+      },
+      {
+        src: "/images/lived/cambodia-2.jpg",
+        alt: "Dense, colorful rooftops across a Phnom Penh neighborhood",
+      },
+      {
+        src: "/images/lived/cambodia-4.jpg",
+        alt: "The National Museum of Cambodia in Phnom Penh",
+      },
+      {
+        src: "/images/lived/cambodia-3.jpg",
+        alt: "Phnom Penh skyline at night reflected in the river",
+      },
+    ],
+  },
 ];
 
 export const journey = [

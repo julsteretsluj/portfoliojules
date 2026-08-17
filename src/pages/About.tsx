@@ -19,7 +19,7 @@ export default function About() {
           </svg>
         </h1>
         <p className="lede">
-          I have lived and studied in seven countries, which shaped a
+          I have lived and studied in eight countries, which shaped a
           cross-cultural perspective and a practical leadership style grounded
           in collaboration.
         </p>

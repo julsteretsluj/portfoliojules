@@ -245,8 +245,8 @@ export default function Home() {
               </Cursor>
               <img
                 src="/images/profile-hero.png"
-                width={368}
-                height={460}
+                width={352}
+                height={440}
                 alt="Jules Kitto-Astrop in a black blazer with a pounamu necklace, New Zealand flag behind"
               />
               <div className="hero-lens" aria-hidden="true">
@@ -286,7 +286,7 @@ export default function Home() {
 
       <section className="globe-band" data-reveal>
         <div className="globe-copy">
-          <h2>Seven countries, one through-line</h2>
+          <h2>Eight countries, one through-line</h2>
           <p>
             Lived and studied across Asia, Europe, Oceania, and North America.
             Conferences, teams, and websites have to hold up after the novelty
