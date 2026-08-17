@@ -272,7 +272,27 @@ export const livedIn: LivedPlace[] = [
       },
     ],
   },
-  { country: "Singapore" },
+  {
+    country: "Singapore",
+    images: [
+      {
+        src: "/images/lived/singapore-2.jpg",
+        alt: "Supertree Grove at Gardens by the Bay",
+      },
+      {
+        src: "/images/lived/singapore-1.jpg",
+        alt: "The Merlion at night, water arcing toward the Esplanade",
+      },
+      {
+        src: "/images/lived/singapore-4.jpg",
+        alt: "Marina Bay Sands and the ArtScience Museum at blue hour",
+      },
+      {
+        src: "/images/lived/singapore-3.jpg",
+        alt: "Siloso Beach on Sentosa, with turquoise water and palm-lined sand",
+      },
+    ],
+  },
   {
     country: "Netherlands",
     images: [
