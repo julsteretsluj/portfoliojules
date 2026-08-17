@@ -492,6 +492,10 @@ export const passportStamps: Record<
     src: "/images/stamp-france.png",
     alt: "Vintage French Sage postage stamp of Peace and Commerce",
   },
+  Germany: {
+    src: "/images/stamp-germany.png",
+    alt: "Vintage German Empire postage stamp of Germania",
+  },
 };
 
 export const passions = [
