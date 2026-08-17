@@ -278,7 +278,31 @@ export const livedIn: LivedPlace[] = [
       },
     ],
   },
-  { country: "Vietnam" },
+  {
+    country: "Vietnam",
+    images: [
+      {
+        src: "/images/lived/vietnam-2.jpg",
+        alt: "A motorbike-filled Saigon street with Bitexco Tower beyond",
+      },
+      {
+        src: "/images/lived/vietnam-1.jpg",
+        alt: "Notre-Dame Cathedral Basilica of Saigon from above",
+      },
+      {
+        src: "/images/lived/vietnam-3.jpg",
+        alt: "Nguyen Hue Walking Street at dusk, toward the People’s Committee Building",
+      },
+      {
+        src: "/images/lived/vietnam-4.jpg",
+        alt: "Neon-lit nightlife on a Ho Chi Minh City street",
+      },
+      {
+        src: "/images/lived/vietnam-5.jpg",
+        alt: "A crowded souvenir stall at Ben Thanh Market",
+      },
+    ],
+  },
   {
     country: "Canada",
     images: [
