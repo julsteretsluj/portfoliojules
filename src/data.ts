@@ -504,6 +504,10 @@ export const passportStamps: Record<
     src: "/images/stamp-japan.png",
     alt: "Vintage Japanese postage stamp of Mount Fuji and cherry blossoms",
   },
+  Malaysia: {
+    src: "/images/stamp-malaysia.png",
+    alt: "Malaysian postage stamp of Crested Wood Partridges, Burong Siul",
+  },
 };
 
 export const passions = [
