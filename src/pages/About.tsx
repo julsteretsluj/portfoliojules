@@ -1,6 +1,6 @@
 import { Globe } from "@/components/ui/globe";
 import { RevealImageList } from "@/components/ui/reveal-images";
-import { education, livedIn, journey, passport } from "../data";
+import { education, livedIn, journey, passport, passportStamps } from "../data";
 
 export default function About() {
   return (
@@ -92,12 +92,23 @@ export default function About() {
           </p>
         </div>
         <ul className="stamp-grid">
-          {passport.map((entry) => (
-            <li key={entry.country} className={entry.stamp ? "has-stamp" : "pending"}>
-              <span>{entry.country}</span>
-              <small>{entry.stamp ? "Stamped" : "Coming soon"}</small>
-            </li>
-          ))}
+          {passport.map((country) => {
+            const stamp = passportStamps[country];
+
+            return (
+              <li key={country} className={stamp ? "has-stamp" : undefined}>
+                {country}
+                {stamp ? (
+                  <img
+                    className={stamp.wide ? "passport-stamp is-wide" : "passport-stamp"}
+                    src={stamp.src}
+                    alt={stamp.alt}
+                    loading="lazy"
+                  />
+                ) : null}
+              </li>
+            );
+          })}
         </ul>
       </section>
     </>

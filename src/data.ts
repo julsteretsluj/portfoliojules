@@ -440,26 +440,41 @@ export const globeMarkers: { location: [number, number]; size: number }[] = [
 ];
 
 export const passport = [
-  { country: "Belgium", stamp: true },
-  { country: "Cambodia", stamp: true },
-  { country: "Canada", stamp: true },
-  { country: "Cook Islands", stamp: true },
-  { country: "Czech Republic", stamp: true },
-  { country: "France", stamp: false },
-  { country: "Germany", stamp: false },
-  { country: "Indonesia", stamp: false },
-  { country: "Japan", stamp: false },
-  { country: "Malaysia", stamp: false },
-  { country: "Netherlands", stamp: false },
-  { country: "New Zealand", stamp: false },
-  { country: "Saint Kitts and Nevis", stamp: false },
-  { country: "Saint-Martin", stamp: false },
-  { country: "Singapore", stamp: false },
-  { country: "Spain", stamp: false },
-  { country: "Thailand", stamp: false },
-  { country: "United States", stamp: false },
-  { country: "Vietnam", stamp: false },
+  "Belgium",
+  "Cambodia",
+  "Canada",
+  "Cook Islands",
+  "Czech Republic",
+  "France",
+  "Germany",
+  "Indonesia",
+  "Japan",
+  "Malaysia",
+  "Netherlands",
+  "New Zealand",
+  "Saint Kitts and Nevis",
+  "Saint-Martin",
+  "Singapore",
+  "Spain",
+  "Thailand",
+  "United States",
+  "Vietnam",
 ];
+
+export const passportStamps: Record<
+  string,
+  { src: string; alt: string; wide?: boolean }
+> = {
+  Belgium: {
+    src: "/images/stamp-belgium.png",
+    alt: "Vintage Belgian postage stamp featuring the Perron of Liège",
+  },
+  Cambodia: {
+    src: "/images/stamp-cambodia.png",
+    alt: "Vintage Cambodian postage stamp of Angkor Wat",
+    wide: true,
+  },
+};
 
 export const passions = [
   {
