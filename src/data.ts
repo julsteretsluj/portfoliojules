@@ -7,6 +7,7 @@ export const links = {
   seamun: "https://seamun.com",
   seamuns: "https://seamuns.site",
   intermun: "https://intermun.site",
+  ydn: "https://youthdiplomacynetwork.org/",
 };
 
 export const socials = [
@@ -128,8 +129,8 @@ export const roles: Role[] = [
     place: "Phnom Penh",
     dates: "June 2026 – Present",
     logo: "/images/ydn-logo.png",
-    href: `mailto:${email}`,
-    hrefLabel: "Request details",
+    href: links.ydn,
+    hrefLabel: "Visit Youth Diplomacy Network",
     bullets: [
       "Design and execute regional youth diplomacy and educational events.",
       "Coordinate workflows across logistics, scheduling, and stakeholder communication.",
