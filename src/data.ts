@@ -483,6 +483,11 @@ export const passportStamps: Record<
     src: "/images/stamp-cook-islands.png",
     alt: "Vintage Rarotonga postage stamp of a Cook Islands figure with a spear",
   },
+  "Czech Republic": {
+    src: "/images/stamp-czech-republic.png",
+    alt: "Czech postage stamp of Panská skála near Kamenický Šenov",
+    wide: true,
+  },
 };
 
 export const passions = [
