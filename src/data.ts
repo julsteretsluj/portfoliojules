@@ -508,6 +508,10 @@ export const passportStamps: Record<
     src: "/images/stamp-malaysia.png",
     alt: "Malaysian postage stamp of Crested Wood Partridges, Burong Siul",
   },
+  Netherlands: {
+    src: "/images/stamp-netherlands.png",
+    alt: "Vintage Dutch postage stamp of a girl from Marken",
+  },
 };
 
 export const passions = [
