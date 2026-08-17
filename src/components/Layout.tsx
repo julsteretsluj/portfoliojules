@@ -6,6 +6,7 @@ import Header from "./Header";
 import PageCurtain from "./PageCurtain";
 import ScrollReveal from "./ScrollReveal";
 import { Balloons } from "./ui/balloons";
+import { LiquidCursor } from "./ui/liquid-cursor";
 import MacOSDock from "./ui/mac-os-dock";
 import { MetamorphicLoader } from "./ui/metamorphic-loader";
 
@@ -32,6 +33,7 @@ export default function Layout() {
         Skip to content
       </a>
       <PageCurtain />
+      <LiquidCursor size={44} />
       <Balloons type="default" />
       <Header />
       <main id="main">

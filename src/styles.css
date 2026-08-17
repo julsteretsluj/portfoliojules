@@ -476,12 +476,18 @@ p {
 }
 
 .wordmark {
-  font-weight: 600;
-  font-size: 1.05rem;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-  color: var(--ink);
+  display: flex;
+  align-items: center;
   margin-right: auto;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.wordmark img {
+  display: block;
+  height: 30px;
+  width: auto;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.16));
 }
 
 .site-nav {
@@ -504,6 +510,12 @@ p {
 
 .nav-cta {
   margin-left: 0.4rem;
+}
+
+.liquid-button,
+.liquid-button:hover {
+  color: var(--ink);
+  text-decoration: none;
 }
 
 .menu-btn {
@@ -658,6 +670,10 @@ main {
 
 .hero-title {
   perspective: 800px;
+}
+
+.sparkles-text-label {
+  font-weight: inherit;
 }
 
 .hero-title .word,
@@ -1400,6 +1416,18 @@ main {
   z-index: 1;
 }
 
+.liquid-cursor {
+  z-index: 60;
+  mix-blend-mode: difference;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.has-liquid-cursor,
+  html.has-liquid-cursor * {
+    cursor: none !important;
+  }
+}
+
 .page-curtain {
   position: fixed;
   inset: 0;
@@ -1424,6 +1452,11 @@ balloons {
   will-change: transform, opacity;
 }
 
+.breathing-text {
+  font-family: "SF Pro Display", "Segoe UI Variable Display", var(--font);
+  font-synthesis: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1440,7 +1473,9 @@ balloons {
 
   .motion-field,
   .page-curtain,
-  .hero-lens {
+  .hero-lens,
+  .liquid-cursor,
+  .sparkles-text svg {
     display: none;
   }
 

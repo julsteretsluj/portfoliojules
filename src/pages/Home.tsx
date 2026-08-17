@@ -7,8 +7,11 @@ import MotionField from "../components/MotionField";
 import { ChromaticLensEffect } from "@/components/ui/chromatic-lens";
 import { Globe } from "@/components/ui/globe";
 import { MorphingText } from "@/components/ui/morphing-text";
+import { SparklesText } from "@/components/ui/sparkles-text";
 import { SocialLinks } from "@/components/ui/social-links";
 import { TextColor } from "@/components/ui/text-color";
+import { BreathingText } from "@/components/ui/breathing-text";
+import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import { launchBalloons } from "@/components/ui/balloons";
 import { email, roles, socials } from "../data";
 import {
@@ -42,7 +45,7 @@ export default function Home() {
   useGSAP(
     () => {
       if (prefersReducedMotion()) return;
-      const title = root.current?.querySelector(".hero-title");
+      const title = root.current?.querySelector(".hero-title .sparkles-text-label");
       const photo = root.current?.querySelector(".hero-photo img");
       const photoWrap = root.current?.querySelector(".hero-photo-frame");
       const tiles = root.current?.querySelectorAll(".tile-grid li");
@@ -146,7 +149,9 @@ export default function Home() {
         <MotionField />
         <div className="hero-copy">
           <p className="eyebrow">Phnom Penh · New Zealander</p>
-          <h1 className="hero-title">Jules Kitto-Astrop</h1>
+          <SparklesText as="h1" className="hero-title">
+            Jules Kitto-Astrop
+          </SparklesText>
           <div className="hero-sub">
             <span className="sr-only">
               Student leader. Event coordinator. Digital builder.
@@ -167,9 +172,9 @@ export default function Home() {
           <p className="meta-line">Relocating from Bangkok · currently in Cambodia</p>
           <div className="hero-actions">
             <Magnetic>
-              <Link className="btn btn-primary" to="/experience">
-                See experience
-              </Link>
+              <LiquidButton asChild size="xl">
+                <Link to="/experience">See experience</Link>
+              </LiquidButton>
             </Magnetic>
             <Link className="btn btn-ghost" to="/about">
               Read my story
@@ -256,20 +261,24 @@ export default function Home() {
       </section>
 
       <section ref={cta} className="cta-band" data-reveal>
-        <h2>Let’s work on something that has to land.</h2>
+        <BreathingText
+          as="h2"
+          label="Let’s work on something that has to land."
+          staggerDuration={0.08}
+          fromFontVariationSettings="'wght' 500"
+          toFontVariationSettings="'wght' 800"
+        />
         <p>
           I am open to leadership opportunities, conference partnerships, and
           youth-focused collaborations.
         </p>
         <div className="hero-actions">
           <Magnetic>
-            <a
-              className="btn btn-primary"
-              href={`mailto:${email}`}
-              onPointerDown={() => launchBalloons()}
-            >
-              Write to Jules
-            </a>
+            <LiquidButton asChild size="xl">
+              <a href={`mailto:${email}`} onPointerDown={() => launchBalloons()}>
+                Write to Jules
+              </a>
+            </LiquidButton>
           </Magnetic>
           <CopyEmail />
         </div>

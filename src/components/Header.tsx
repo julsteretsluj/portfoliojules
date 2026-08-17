@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { List, X } from "@phosphor-icons/react";
+import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import { NavLink } from "react-router-dom";
 import { email, nav } from "../data";
 
@@ -10,7 +11,7 @@ export default function Header() {
     <header className="apple-nav">
       <div className="apple-nav-inner">
         <NavLink to="/" className="wordmark" onClick={() => setOpen(false)}>
-          Jules
+          <img src="/images/jules-wordmark.png" alt="Jules" />
         </NavLink>
         <nav className={`site-nav ${open ? "is-open" : ""}`} id="site-nav" aria-label="Primary">
           {nav.map((item) => (
@@ -24,9 +25,9 @@ export default function Header() {
             </NavLink>
           ))}
         </nav>
-        <a className="btn btn-primary nav-cta" href={`mailto:${email}`}>
-          Send an email
-        </a>
+        <LiquidButton asChild size="lg" className="nav-cta">
+          <a href={`mailto:${email}`}>Send an email</a>
+        </LiquidButton>
         <button
           className="menu-btn"
           type="button"
