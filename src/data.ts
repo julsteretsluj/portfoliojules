@@ -488,6 +488,10 @@ export const passportStamps: Record<
     alt: "Czech postage stamp of Panská skála near Kamenický Šenov",
     wide: true,
   },
+  France: {
+    src: "/images/stamp-france.png",
+    alt: "Vintage French Sage postage stamp of Peace and Commerce",
+  },
 };
 
 export const passions = [
