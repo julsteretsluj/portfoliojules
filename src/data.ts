@@ -496,6 +496,14 @@ export const passportStamps: Record<
     src: "/images/stamp-germany.png",
     alt: "Vintage German Empire postage stamp of Germania",
   },
+  Indonesia: {
+    src: "/images/stamp-indonesia.png",
+    alt: "Indonesian postage stamp of a red hibiscus, Kembang Sepatu",
+  },
+  Japan: {
+    src: "/images/stamp-japan.png",
+    alt: "Vintage Japanese postage stamp of Mount Fuji and cherry blossoms",
+  },
 };
 
 export const passions = [
