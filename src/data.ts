@@ -34,6 +34,7 @@ export const nav = [
   { to: "/skills", label: "Skills" },
   { to: "/about", label: "About" },
   { to: "/passions", label: "Passions" },
+  { to: "/takes", label: "Takes" },
   { to: "/now", label: "Now" },
 ];
 
@@ -62,6 +63,11 @@ export const dockApps = [
     id: "/passions",
     name: "Passions",
     icon: "https://cdn.jim-nielsen.com/macos/1024/photos-2021-05-28.png?rf=1024",
+  },
+  {
+    id: "/takes",
+    name: "Takes",
+    icon: "https://cdn.jim-nielsen.com/macos/1024/textedit-2021-06-03.png?rf=1024",
   },
   {
     id: "/now",
@@ -313,5 +319,40 @@ export const passions = [
   {
     title: "Web development",
     body: "Building websites lets me turn ideas into useful tools and platforms that help people connect and take action.",
+  },
+];
+
+export const takes = [
+  {
+    title: "School no longer buys what it sold.",
+    body: "Conventional schooling has become relatively ineffective. It is a means to an end that no longer even achieves the goal it set out to achieve: job security.",
+  },
+  {
+    title: "Rooms over stamps.",
+    body: "A well-used passport is a side effect. The work is making rooms that actually function — committees, ops, websites — after the novelty of a new city wears off.",
+  },
+  {
+    title: "If it does not land, it did not happen.",
+    body: "I would rather ship a conference, a tracker, or a page that holds under pressure than collect a title that looks good in a programme.",
+  },
+  {
+    title: "The website is part of the floor.",
+    body: "Digital work is not a side project next to logistics. Domain setup, pages, and trackers are the same delivery stack as the room.",
+  },
+  {
+    title: "Access before prestige.",
+    body: "MUN knowledge should not sit behind whoever already knows the procedure. That is why SEAMUNs Thailand exists: explainers, infographics, and a bridge between conferences.",
+  },
+  {
+    title: "Strengths-based, or it is not inclusion.",
+    body: "I am AuDHD and a Level 1 LSN autistic person. Understanding, accommodations, and strengths-based perspectives are how teams actually get work done — not extras.",
+  },
+  {
+    title: "Learn from people most impacted.",
+    body: "Disability justice is not a branding exercise. I am committed to removing barriers in education, events, and public spaces by learning from the people those systems fail first.",
+  },
+  {
+    title: "Practical beats impressive.",
+    body: "The VERSO Hack work I am proud of won on implementation and feasibility, not on looking futuristic. Same test I use for events.",
   },
 ];

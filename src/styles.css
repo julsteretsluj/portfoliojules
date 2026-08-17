@@ -272,6 +272,9 @@
 }
 
 .macbook-container {
+  position: relative;
+  width: 150px;
+  height: 120px;
   perspective: 500px;
   transform-style: preserve-3d;
 }
@@ -665,6 +668,8 @@ main {
 .lego-aside-band,
 .now-columns,
 .notebook,
+.takes-list,
+.take-lead,
 .role-index,
 .feature-role,
 .role-stack,
@@ -1076,6 +1081,9 @@ main {
 
 .macbook-stage {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 440px;
   overflow: hidden;
   border-radius: var(--radius-lg);
@@ -1083,9 +1091,104 @@ main {
 }
 
 .macbook-stage .macbook-embed {
-  transform: scale(2.55);
-  transform-origin: center 46%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 160px;
+  transform: scale(2.45) translateY(12px);
+  transform-origin: center center;
   transform-style: preserve-3d;
+}
+
+.macbook-embed.is-interactive .custom-animate-rotate,
+.macbook-embed.is-interactive .custom-animate-lid-screen,
+.macbook-embed.is-interactive .custom-animate-lid-macbody,
+.macbook-embed.is-interactive .custom-animate-lid-keyboard-area,
+.macbook-embed.is-interactive .custom-animate-screen-shade,
+.macbook-embed.is-interactive .custom-animate-keys,
+.macbook-embed.is-interactive .custom-animate-macbook-shadow {
+  animation: none;
+}
+
+.macbook-embed.is-interactive .macbook-inner {
+  transform: rotateX(-18deg) rotateY(-22deg);
+}
+
+.macbook-embed.is-interactive .macbook-screen {
+  transform: rotateX(8deg);
+}
+
+.macbook-embed.is-interactive .macbook-key {
+  cursor: pointer;
+}
+
+.macbook-trackpad {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -18px;
+  margin-top: -44px;
+  height: 31px;
+  width: 40px;
+  border: 0;
+  padding: 0;
+  border-radius: 4px;
+  background: #cdcdcd;
+  background-image: linear-gradient(30deg, rgba(0, 0, 0, 0.24) 0%, rgba(0, 0, 0, 0) 100%);
+  box-shadow: inset 0 0 3px #888;
+  cursor: pointer;
+}
+
+.macbook-trackpad:disabled {
+  cursor: default;
+}
+
+.macbook-desktop {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  padding: 4px 3px;
+  background: #111;
+  color: #f5f5f7;
+  cursor: pointer;
+}
+
+.macbook-desktop-bar {
+  width: 100%;
+  border-radius: 1px;
+  background: #2c2c2e;
+  padding: 1px 3px;
+  font-size: 5px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.macbook-desktop-mark {
+  margin-top: 14px;
+  color: #7dd3fc;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+}
+
+.macbook-hint {
+  margin: 0.7rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.macbook-embed.is-interactive {
+  cursor: grab;
 }
 
 .macbook-copy p {
@@ -1299,6 +1402,83 @@ main {
   padding: 1.6rem 1.7rem;
   margin: 0 auto 3rem;
   max-width: none;
+}
+
+.takes-head {
+  text-align: left;
+  max-width: 40rem;
+}
+
+.take-lead {
+  margin: 0 auto 1.6rem;
+  background: var(--ink);
+  color: #f5f5f7;
+  padding: 2.2rem 1.9rem 2rem;
+  border-radius: var(--radius-lg);
+}
+
+.take-lead p:nth-of-type(2) {
+  margin: 0.2rem 0 0.7rem;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.take-lead span {
+  display: block;
+  max-width: 36rem;
+  color: #a1a1a6;
+}
+
+.take-n {
+  margin: 0 0 0.35rem;
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.take-lead .take-n {
+  color: #2997ff;
+}
+
+.takes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 3.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.take {
+  max-width: 36rem;
+  padding: 1.7rem 0 1.9rem;
+  border-top: 1px solid var(--line);
+}
+
+.take:nth-child(even) {
+  margin-left: auto;
+  max-width: 32rem;
+}
+
+.take:nth-child(3) {
+  max-width: none;
+  margin: 0.6rem 0 0.8rem;
+  padding: 1.8rem 1.7rem;
+  border-top: 0;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.take h2 {
+  margin-bottom: 0.45rem;
+}
+
+.take p {
+  margin: 0;
+  color: var(--muted);
 }
 
 .now-columns {
@@ -1676,11 +1856,11 @@ balloons {
   }
 
   .macbook-stage {
-    min-height: 340px;
+    min-height: 360px;
     order: -1;
   }
 
   .macbook-stage .macbook-embed {
-    transform: scale(2.05);
+    transform: scale(2.05) translateY(8px);
   }
 }

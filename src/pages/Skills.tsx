@@ -32,7 +32,7 @@ export default function Skills() {
 
       <section className="macbook-band" data-reveal>
         <div className="macbook-stage">
-          <Macbook />
+          <Macbook interactive />
         </div>
         <div className="macbook-copy">
           <p className="eyebrow">Digital execution</p>
@@ -42,6 +42,7 @@ export default function Skills() {
             trackers are part of the same delivery stack as the conference
             floor.
           </p>
+          <p className="macbook-hint">Move around it. Click the screen to switch sites.</p>
           <p>
             <a className="text-link" href={links.seamun} target="_blank" rel="noreferrer">
               seamun.com
