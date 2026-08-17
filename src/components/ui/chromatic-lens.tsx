@@ -123,6 +123,7 @@ const fragmentShaderSource = `
   uniform vec2 u_dragOffset;
   uniform int u_aberrationMode;
   uniform float u_aberrationBlur;
+  uniform bool u_lensOnly;
   varying vec2 v_texCoord;
 
   float rand(vec2 co){ return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453); }
@@ -165,7 +166,7 @@ const fragmentShaderSource = `
           vec3 aberratedColor = vec3(r, g, b);
           if (u_enableTint) { aberratedColor = mix(aberratedColor, u_tintColor.rgb, u_tintIntensity); }
           finalColor = vec4(aberratedColor, 1.0);
-      } else { finalColor = texture2D(u_texture, st); }
+      } else { finalColor = u_lensOnly ? vec4(0.0) : texture2D(u_texture, st); }
       gl_FragColor = finalColor;
   }
 `;
@@ -203,6 +204,7 @@ interface Props {
     style?: CSSProperties;
     width: number | string;
     height: number | string;
+    lensOnly: boolean;
 }
 
 const defaultLensProps: Omit<Props, "image" | "style"> = {
@@ -232,6 +234,7 @@ const defaultLensProps: Omit<Props, "image" | "style"> = {
     enableDrag: false,
     dragStrength: 1,
     dragDecay: 0.95,
+    lensOnly: false,
 };
 
 export type ChromaticLensProps = Partial<Omit<Props, "image">> & {
@@ -245,7 +248,7 @@ export function ChromaticLensEffect(raw: ChromaticLensProps) {
         lensWidthPixels, lensHeightPixels, lensStrength, followSmoothness, cursorStyle,
         enableSwirl, swirlStrength, enableWobble, wobbleStrength, wobbleSpeed,
         wobbleFrequency, distortionMode, fisheyeStrength, enableTint, tintColor,
-        tintIntensity, enableDrag, dragStrength, dragDecay, style, width, height,
+        tintIntensity, enableDrag, dragStrength, dragDecay, style, width, height, lensOnly,
     } = props;
 
     // --- Refs, State, Hooks, Callbacks (Keep all internal logic) ---
@@ -261,7 +264,7 @@ export function ChromaticLensEffect(raw: ChromaticLensProps) {
     const timeRef = useRef<number>(0);
     const targetMousePositionRef = useRef<{ x: number; y: number }>({ x: 0.5, y: 0.5 });
     const animatedMousePositionRef = useRef<{ x: number; y: number }>({ x: 0.5, y: 0.5 });
-    const mouseInsideRef = useRef<boolean>(true);
+    const mouseInsideRef = useRef<boolean>(false);
     const isAnimatingRef = useRef<boolean>(true);
     const isDraggingRef = useRef<boolean>(false);
     const dragStartPosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -276,9 +279,11 @@ export function ChromaticLensEffect(raw: ChromaticLensProps) {
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        const gl = canvas.getContext("webgl", { antialias: true, powerPreference: "default" });
+        const gl = canvas.getContext("webgl", { antialias: true, alpha: true, premultipliedAlpha: false, powerPreference: "default" });
         if (!gl) { console.error("WebGL not supported"); return; }
         glRef.current = gl;
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
         const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
         const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
         if (!vertexShader || !fragmentShader) return;
@@ -325,6 +330,7 @@ export function ChromaticLensEffect(raw: ChromaticLensProps) {
             dragOffsetLocation: gl.getUniformLocation(program, "u_dragOffset"),
             aberrationModeLocation: gl.getUniformLocation(program, "u_aberrationMode"),
             aberrationBlurLocation: gl.getUniformLocation(program, "u_aberrationBlur"),
+            lensOnlyLocation: gl.getUniformLocation(program, "u_lensOnly"),
         };
         (program as any).locations = locations;
         gl.useProgram(program);
@@ -338,7 +344,8 @@ export function ChromaticLensEffect(raw: ChromaticLensProps) {
             setIsImageLoaded(false);
             if (gl && texture) { gl.bindTexture(gl.TEXTURE_2D, texture); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0])); } return;
         }
-        setIsImageLoaded(false); const img = new Image(); img.crossOrigin = "anonymous";
+        setIsImageLoaded(false); const img = new Image();
+        if (/^https?:/i.test(image.src)) img.crossOrigin = "anonymous";
         img.onload = () => {
             if (!gl || !texture) return;
             gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -349,7 +356,7 @@ export function ChromaticLensEffect(raw: ChromaticLensProps) {
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-            setIsImageLoaded(true); targetMousePositionRef.current = { x: 0.5, y: 0.5 }; animatedMousePositionRef.current = { x: 0.5, y: 0.5 }; mouseInsideRef.current = true; isAnimatingRef.current = true; dragOffsetRef.current = { x: 0, y: 0 };
+            setIsImageLoaded(true); targetMousePositionRef.current = { x: 0.5, y: 0.5 }; animatedMousePositionRef.current = { x: 0.5, y: 0.5 }; mouseInsideRef.current = false; isAnimatingRef.current = true; dragOffsetRef.current = { x: 0, y: 0 };
         };
         img.onerror = (e) => { console.error("Error loading image:", e); setIsImageLoaded(false); if (gl && texture) { gl.bindTexture(gl.TEXTURE_2D, texture); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0])); } };
         img.src = image.src;
@@ -358,16 +365,46 @@ export function ChromaticLensEffect(raw: ChromaticLensProps) {
     // Container Size Observation useEffect
     useEffect(() => {
         const element = containerRef.current; if (!element) return;
-        const observerCallback = (entries: ResizeObserverEntry[]) => { for (let entry of entries) { const { width, height } = entry.contentRect; setObservedSize((prevSize) => { if (prevSize.width !== width || prevSize.height !== height) { return { width, height }; } return prevSize; }); } };
-        const resizeObserver = new ResizeObserver(observerCallback); resizeObserver.observe(element);
-        return () => { resizeObserver.disconnect(); };
+        const applySize = (width: number, height: number) => {
+            if (width < 1 || height < 1) return;
+            setObservedSize((prevSize) => {
+                if (prevSize.width !== width || prevSize.height !== height) {
+                    return { width, height };
+                }
+                return prevSize;
+            });
+        };
+        const measure = () => {
+            const rect = element.getBoundingClientRect();
+            applySize(rect.width, rect.height);
+        };
+        measure();
+        const observerCallback = (entries: ResizeObserverEntry[]) => {
+            for (const entry of entries) {
+                const { width, height } = entry.contentRect;
+                if (width >= 1 && height >= 1) applySize(width, height);
+                else measure();
+            }
+        };
+        const resizeObserver = new ResizeObserver(observerCallback);
+        resizeObserver.observe(element);
+        window.addEventListener("resize", measure);
+        return () => {
+            resizeObserver.disconnect();
+            window.removeEventListener("resize", measure);
+        };
     }, []);
 
     // Canvas Resizing useEffect
     useEffect(() => {
         const canvas = canvasRef.current; const gl = glRef.current; if (!canvas || !gl || observedSize.width === 0 || observedSize.height === 0) { return; }
         const dpr = window.devicePixelRatio || 1; const targetWidth = Math.round(observedSize.width * dpr); const targetHeight = Math.round(observedSize.height * dpr);
-        if (canvas.width !== targetWidth || canvas.height !== targetHeight) { canvas.width = targetWidth; canvas.height = targetHeight; gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight); setCanvasPhysicalSize({ width: gl.drawingBufferWidth, height: gl.drawingBufferHeight }); }
+        if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        }
+        setCanvasPhysicalSize({ width: gl.drawingBufferWidth, height: gl.drawingBufferHeight });
     }, [observedSize]);
 
     // Animation Loop Callback
@@ -383,11 +420,15 @@ export function ChromaticLensEffect(raw: ChromaticLensProps) {
         gl.bindBuffer(gl.ARRAY_BUFFER, texBuffer); gl.enableVertexAttribArray(locations.texCoordLocation); gl.vertexAttribPointer(locations.texCoordLocation, 2, gl.FLOAT, false, 0, 0);
         gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texture);
         const dpr = window.devicePixelRatio || 1;
-        gl.uniform2f(locations.resolutionLocation, canvas.width, canvas.height); gl.uniform2f(locations.mousePositionLocation, animatedMousePositionRef.current.x, 1.0 - animatedMousePositionRef.current.y); gl.uniform1f(locations.aberrationStrengthLocation, aberrationStrength); gl.uniform1f(locations.radiusLocation, radius); gl.uniform1f(locations.lensStrengthLocation, lensStrength); gl.uniform1i(locations.textureLocation, 0); gl.uniform1i(locations.usePixelSizeLocation, usePixelSize ? 1 : 0); gl.uniform2f(locations.lensPixelSizeLocation, lensWidthPixels * dpr, lensHeightPixels * dpr); gl.uniform1f(locations.timeLocation, timeRef.current); gl.uniform1i(locations.enableSwirlLocation, enableSwirl ? 1 : 0); gl.uniform1f(locations.swirlStrengthLocation, swirlStrength); gl.uniform1i(locations.enableWobbleLocation, enableWobble ? 1 : 0); gl.uniform1f(locations.wobbleStrengthLocation, wobbleStrength); gl.uniform1f(locations.wobbleSpeedLocation, wobbleSpeed); gl.uniform1f(locations.wobbleFrequencyLocation, wobbleFrequency); gl.uniform1i(locations.distortionModeLocation, distortionMode === "fisheye" ? 1 : 0); gl.uniform1f(locations.fisheyeStrengthLocation, fisheyeStrength); gl.uniform1i(locations.enableTintLocation, enableTint ? 1 : 0); const colorVec = parseColor(tintColor); gl.uniform3f(locations.tintColorLocation, colorVec[0], colorVec[1], colorVec[2]); gl.uniform1f(locations.tintIntensityLocation, tintIntensity); gl.uniform1i(locations.enableDragLocation, enableDrag ? 1 : 0); gl.uniform2f(locations.dragOffsetLocation, dragOffsetRef.current.x, dragOffsetRef.current.y); gl.uniform1i(locations.aberrationModeLocation, aberrationMode === "radial" ? 1 : 0); gl.uniform1f(locations.aberrationBlurLocation, aberrationBlur * dpr);
+        const activeRadius = mouseInsideRef.current ? radius : 0;
+        const activeStrength = mouseInsideRef.current ? lensStrength : 0;
+        const activePixelW = mouseInsideRef.current ? lensWidthPixels * dpr : 0;
+        const activePixelH = mouseInsideRef.current ? lensHeightPixels * dpr : 0;
+        gl.uniform2f(locations.resolutionLocation, canvas.width, canvas.height); gl.uniform2f(locations.mousePositionLocation, animatedMousePositionRef.current.x, 1.0 - animatedMousePositionRef.current.y); gl.uniform1f(locations.aberrationStrengthLocation, aberrationStrength); gl.uniform1f(locations.radiusLocation, activeRadius); gl.uniform1f(locations.lensStrengthLocation, activeStrength); gl.uniform1i(locations.textureLocation, 0); gl.uniform1i(locations.usePixelSizeLocation, usePixelSize ? 1 : 0); gl.uniform2f(locations.lensPixelSizeLocation, activePixelW, activePixelH); gl.uniform1f(locations.timeLocation, timeRef.current); gl.uniform1i(locations.enableSwirlLocation, enableSwirl ? 1 : 0); gl.uniform1f(locations.swirlStrengthLocation, swirlStrength); gl.uniform1i(locations.enableWobbleLocation, enableWobble ? 1 : 0); gl.uniform1f(locations.wobbleStrengthLocation, wobbleStrength); gl.uniform1f(locations.wobbleSpeedLocation, wobbleSpeed); gl.uniform1f(locations.wobbleFrequencyLocation, wobbleFrequency); gl.uniform1i(locations.distortionModeLocation, distortionMode === "fisheye" ? 1 : 0); gl.uniform1f(locations.fisheyeStrengthLocation, fisheyeStrength); gl.uniform1i(locations.enableTintLocation, enableTint ? 1 : 0); const colorVec = parseColor(tintColor); gl.uniform3f(locations.tintColorLocation, colorVec[0], colorVec[1], colorVec[2]); gl.uniform1f(locations.tintIntensityLocation, tintIntensity); gl.uniform1i(locations.enableDragLocation, enableDrag ? 1 : 0); gl.uniform2f(locations.dragOffsetLocation, dragOffsetRef.current.x, dragOffsetRef.current.y);         gl.uniform1i(locations.aberrationModeLocation, aberrationMode === "radial" ? 1 : 0); gl.uniform1f(locations.aberrationBlurLocation, aberrationBlur * dpr); gl.uniform1i(locations.lensOnlyLocation, lensOnly ? 1 : 0);
         gl.drawArrays(gl.TRIANGLES, 0, 6);
         const needsWobble = enableWobble && wobbleStrength > 0; const needsDragDecay = enableDrag && (dragOffsetRef.current.x !== 0 || dragOffsetRef.current.y !== 0); const keepAnimating = mouseInsideRef.current || needsLerp || needsWobble || needsDragDecay;
         if (keepAnimating) { isAnimatingRef.current = true; animationFrameRef.current = requestAnimationFrame(renderLoopCallback); } else { isAnimatingRef.current = false; animationFrameRef.current = 0; }
-    }, [isImageLoaded, aberrationStrength, radius, lensStrength, followSmoothness, usePixelSize, lensWidthPixels, lensHeightPixels, canvasPhysicalSize, enableSwirl, swirlStrength, enableWobble, wobbleStrength, wobbleSpeed, wobbleFrequency, distortionMode, fisheyeStrength, enableTint, tintColor, tintIntensity, enableDrag, dragStrength, dragDecay, aberrationMode, aberrationBlur]);
+    }, [isImageLoaded, aberrationStrength, radius, lensStrength, followSmoothness, usePixelSize, lensWidthPixels, lensHeightPixels, canvasPhysicalSize, enableSwirl, swirlStrength, enableWobble, wobbleStrength, wobbleSpeed, wobbleFrequency, distortionMode, fisheyeStrength, enableTint, tintColor, tintIntensity, enableDrag, dragStrength, dragDecay, aberrationMode, aberrationBlur, lensOnly]);
 
     // Ensure Animation Starts/Restarts Callback
     const ensureAnimating = useCallback(() => {
@@ -412,7 +453,7 @@ export function ChromaticLensEffect(raw: ChromaticLensProps) {
     return (
         <div
             ref={containerRef}
-            style={{ ...style, width: width, height: height, cursor: cursorStyle, overflow: "hidden", position: "relative" }}
+            style={{ ...style, width: width, height: height, cursor: cursorStyle, overflow: "hidden", position: style?.position ?? "relative" }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             onMouseDown={handleMouseDown}
@@ -422,7 +463,7 @@ export function ChromaticLensEffect(raw: ChromaticLensProps) {
                 ref={canvasRef}
                 style={{ display: "block", width: "100%", height: "100%", opacity: isImageLoaded ? 1 : 0, transition: "opacity 0.3s ease-in-out" }}
             />
-            {!isImageLoaded && image?.src && (
+            {!isImageLoaded && image?.src && !lensOnly && (
                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#555', background: 'rgba(255,255,255,0.1)', fontSize: '12px', pointerEvents: 'none' }}>Loading...</div>
              )}
         </div>

@@ -12,9 +12,21 @@ const keyClass =
   "macbook-key custom-animate-keys float-left m-[1px] h-[6px] w-[6px] rounded-[2px] bg-[#444] shadow-[0_-2px_0_#222]";
 
 const screens = [
-  { label: "seamun.com", href: links.seamun },
-  { label: "seamuns.site", href: links.seamuns },
-  { label: "intermun.site", href: links.intermun },
+  {
+    label: "seamun.com",
+    href: links.seamun,
+    image: "/images/sites/seamun.jpg",
+  },
+  {
+    label: "seamuns.site",
+    href: links.seamuns,
+    image: "/images/sites/seamuns.jpg",
+  },
+  {
+    label: "intermun.site",
+    href: links.intermun,
+    image: "/images/sites/intermun.jpg",
+  },
 ] as const;
 
 type MacbookProps = {
@@ -106,7 +118,6 @@ export function Macbook({ className, interactive = false }: MacbookProps) {
             <div className="macbook-screen-face-one absolute bottom-0 left-0 h-[96px] w-[150px] rounded-[7px] bg-[#d3d3d3] bg-[linear-gradient(45deg,rgba(0,0,0,0.24)_0%,rgba(0,0,0,0)_100%)]">
               <div className="absolute left-1/2 top-[4px] ml-[-1.5px] h-[3px] w-[3px] rounded-full bg-black" />
               <div className="relative m-[10px] h-[74px] w-[130px] overflow-hidden rounded-[1px] bg-black bg-[length:100%_100%] shadow-[inset_0_0_2px_rgba(0,0,0,1)]">
-                <div className="custom-animate-screen-shade pointer-events-none absolute left-0 top-0 h-[74px] w-[130px] bg-[length:300px_200px] bg-[position:0px_0px] bg-[linear-gradient(-135deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.1)_47%,rgba(255,255,255,0)_48%)]" />
                 {interactive ? (
                   <button
                     type="button"
@@ -114,10 +125,29 @@ export function Macbook({ className, interactive = false }: MacbookProps) {
                     onClick={cycleScreen}
                     aria-label={`Screen showing ${screen.label}. Click to switch site.`}
                   >
+                    <img
+                      key={screen.image}
+                      className="macbook-desktop-shot"
+                      src={screen.image}
+                      alt=""
+                      width={1440}
+                      height={820}
+                    />
                     <span className="macbook-desktop-bar">{screen.label}</span>
-                    <span className="macbook-desktop-mark">JK</span>
                   </button>
-                ) : null}
+                ) : (
+                  <div className="macbook-desktop" aria-hidden="true">
+                    <img
+                      className="macbook-desktop-shot"
+                      src={screens[0].image}
+                      alt=""
+                      width={1440}
+                      height={820}
+                    />
+                    <span className="macbook-desktop-bar">{screens[0].label}</span>
+                  </div>
+                )}
+                <div className="custom-animate-screen-shade pointer-events-none absolute left-0 top-0 z-[2] h-[74px] w-[130px] bg-[length:300px_200px] bg-[position:0px_0px] bg-[linear-gradient(-135deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.1)_47%,rgba(255,255,255,0)_48%)]" />
               </div>
               <span className="absolute left-[57px] top-[85px] text-[6px] text-[#666]">
                 MacBook Air

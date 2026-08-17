@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import {
   AnimatePresence,
   motion,
@@ -45,7 +46,7 @@ export function Cursor({
 }: CursorProps) {
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
-  const cursorRef = useRef<HTMLDivElement>(null);
+  const hostRef = useRef<HTMLSpanElement>(null);
   const [enabled, setEnabled] = useState(false);
   const [isVisible, setIsVisible] = useState(!attachToParent);
 
@@ -81,38 +82,44 @@ export function Cursor({
     document.addEventListener("mousemove", updatePosition);
     return () => {
       document.removeEventListener("mousemove", updatePosition);
-      document.documentElement.classList.remove("has-mp-cursor");
+      if (!attachToParent) {
+        document.documentElement.classList.remove("has-mp-cursor");
+      }
     };
   }, [attachToParent, cursorX, cursorY, enabled, onPositionChange]);
 
   useEffect(() => {
     if (!enabled || !attachToParent) return;
-    const parent = cursorRef.current?.parentElement;
+    const parent = hostRef.current?.parentElement;
     if (!parent) return;
 
     const onEnter = () => {
       parent.style.cursor = "none";
+      document.documentElement.classList.add("has-mp-cursor");
       setIsVisible(true);
     };
     const onLeave = () => {
       parent.style.cursor = "";
+      document.documentElement.classList.remove("has-mp-cursor");
       setIsVisible(false);
     };
 
     parent.addEventListener("mouseenter", onEnter);
     parent.addEventListener("mouseleave", onLeave);
+    if (parent.matches(":hover")) onEnter();
+
     return () => {
       parent.removeEventListener("mouseenter", onEnter);
       parent.removeEventListener("mouseleave", onLeave);
       parent.style.cursor = "";
+      document.documentElement.classList.remove("has-mp-cursor");
     };
   }, [attachToParent, enabled]);
 
   if (!enabled) return null;
 
-  return (
+  const cursor = (
     <motion.div
-      ref={cursorRef}
       aria-hidden="true"
       className={cn(
         "mp-cursor pointer-events-none fixed top-0 left-0 z-[61]",
@@ -139,5 +146,12 @@ export function Cursor({
         )}
       </AnimatePresence>
     </motion.div>
+  );
+
+  return (
+    <>
+      <span ref={hostRef} aria-hidden="true" className="hero-cursor-host" />
+      {createPortal(cursor, document.body)}
+    </>
   );
 }

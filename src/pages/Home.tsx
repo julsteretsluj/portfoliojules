@@ -236,7 +236,6 @@ export default function Home() {
                   exit: { scale: 0.3, opacity: 0 },
                 }}
                 transition={{ ease: "easeInOut", duration: 0.15 }}
-                className="left-12 top-4"
               >
                 <div className="cursor-follow">
                   <MouseIcon className="h-6 w-6" />
@@ -255,6 +254,15 @@ export default function Home() {
                   width="100%"
                   height="100%"
                   cursorStyle="none"
+                  usePixelSize
+                  lensWidthPixels={92}
+                  lensHeightPixels={92}
+                  radius={0.38}
+                  lensStrength={1.85}
+                  aberrationStrength={0.72}
+                  enableWobble
+                  wobbleStrength={0.55}
+                  lensOnly
                 />
               </div>
             </div>

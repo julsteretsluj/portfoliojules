@@ -545,6 +545,11 @@ export const passportStamps: Record<
     alt: "St. Maarten postage stamp of Princess Juliana International Airport",
     wide: true,
   },
+  Singapore: {
+    src: "/images/stamp-singapore.png",
+    alt: "Singapore postage stamp of a Ranchu goldfish",
+    wide: true,
+  },
 };
 
 export const passions = [
