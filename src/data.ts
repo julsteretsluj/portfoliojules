@@ -157,11 +157,15 @@ export const roles: Role[] = [
     title: "Global Advisory Council",
     org: "Creative Leadership Conference",
     logo: "/images/clc-logo.png",
+    href: "https://creativeleadershipconference.com/",
+    hrefLabel: "Visit Creative Leadership Conference",
   },
   {
     title: "Youth Advisory Board Member",
     org: "SDG with Youth",
     logo: "/images/sdg-with-youth-logo.png",
+    href: "https://sdgwithyouth.org/",
+    hrefLabel: "Visit SDG with Youth",
   },
 ];
 
