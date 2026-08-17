@@ -133,24 +133,29 @@ export const roles: Role[] = [
   {
     title: "Deputy Secretary-General",
     org: "AriseMUN 2026",
+    logo: "/images/arisemun-logo.png",
   },
   {
     title: "Ambassador",
     org: "International Organization of Youth",
+    logo: "/images/ioy-logo.png",
     href: "https://www.ioyforyouth.org/",
     hrefLabel: "Visit IOY",
   },
   {
     title: "Community Supporter",
     org: "Guardian of Childhood",
+    logo: "/images/guardian-of-childhood-logo.png",
   },
   {
     title: "Global Advisory Council",
     org: "Creative Leadership Conference",
+    logo: "/images/clc-logo.png",
   },
   {
     title: "Youth Advisory Board Member",
     org: "SDG with Youth",
+    logo: "/images/sdg-with-youth-logo.png",
   },
 ];
 
