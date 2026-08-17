@@ -550,6 +550,15 @@ export const passportStamps: Record<
     alt: "Singapore postage stamp of a Ranchu goldfish",
     wide: true,
   },
+  Spain: {
+    src: "/images/stamp-spain.png",
+    alt: "Spanish postage stamp marking 175 years of Correos, with the 1850 Isabella II issue",
+  },
+  Thailand: {
+    src: "/images/stamp-thailand.png",
+    alt: "Thai postage stamp of a rubber plantation",
+    wide: true,
+  },
 };
 
 export const passions = [
