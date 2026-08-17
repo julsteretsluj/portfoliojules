@@ -133,7 +133,6 @@ export function Macbook({ className, interactive = false }: MacbookProps) {
                       width={1440}
                       height={820}
                     />
-                    <span className="macbook-desktop-bar">{screen.label}</span>
                   </button>
                 ) : (
                   <div className="macbook-desktop" aria-hidden="true">
@@ -144,10 +143,10 @@ export function Macbook({ className, interactive = false }: MacbookProps) {
                       width={1440}
                       height={820}
                     />
-                    <span className="macbook-desktop-bar">{screens[0].label}</span>
                   </div>
                 )}
                 <div className="custom-animate-screen-shade pointer-events-none absolute left-0 top-0 z-[2] h-[74px] w-[130px] bg-[length:300px_200px] bg-[position:0px_0px] bg-[linear-gradient(-135deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.1)_47%,rgba(255,255,255,0)_48%)]" />
+                <span className="macbook-desktop-bar">{interactive ? screen.label : screens[0].label}</span>
               </div>
               <span className="absolute left-[57px] top-[85px] text-[6px] text-[#666]">
                 MacBook Air

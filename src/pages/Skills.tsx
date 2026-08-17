@@ -62,7 +62,7 @@ export default function Skills() {
       <section className="toolkit reveal from-up">
         <div>
           <p className="eyebrow">Digital toolkit</p>
-          <h2>The four tools I keep closest</h2>
+          <h2>The tools I keep closest</h2>
           <p>
             Planning, documentation, design, and execution — usually in that
             order, sometimes all at once.

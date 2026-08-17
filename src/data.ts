@@ -209,7 +209,7 @@ export const skills = [
   },
 ];
 
-export const toolkit = ["Cursor AI", "ClickUp", "Canva", "Google Workspace"];
+export const toolkit = ["Cursor AI", "Gemini", "ClickUp", "Canva", "Figma", "Google Workspace"];
 export const toolkitTags = ["Planning", "Documentation", "Design", "Execution"];
 
 export const education = [
