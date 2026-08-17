@@ -479,6 +479,10 @@ export const passportStamps: Record<
     alt: "Vintage Canadian postage stamp of a winter coastal scene",
     wide: true,
   },
+  "Cook Islands": {
+    src: "/images/stamp-cook-islands.png",
+    alt: "Vintage Rarotonga postage stamp of a Cook Islands figure with a spear",
+  },
 };
 
 export const passions = [
