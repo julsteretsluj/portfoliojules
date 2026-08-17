@@ -608,4 +608,108 @@ export const takes = [
     title: "Practical beats impressive.",
     body: "The VERSO Hack work I am proud of won on implementation and feasibility, not on looking futuristic. Same test I use for events.",
   },
+  {
+    title: "A council with actual teeth.",
+    body: "The world would be better with a universal council acting in the best interest of all people, with legal authority over nations. That means action against war crimes — especially by people in power — healthcare access that local permission currently blocks, a shared language taught alongside mother tongues, and equity, unity, and diversity held at the same time. Members should be elected democratically, swear an oath to do no harm, and be punished if they break the rules of the job.",
+  },
+  {
+    title: "Education should be free.",
+    body: "Covered. Not a luxury product. If access depends on who can pay, it is not a public good.",
+  },
+  {
+    title: "Healthcare should be free.",
+    body: "Covered. People should not have to qualify financially to stay alive or get well.",
+  },
+  {
+    title: "Mental health is health.",
+    body: "It is not a side category of physical health. Treat it with the same seriousness, funding, and urgency.",
+  },
+  {
+    title: "Mental health care should be free.",
+    body: "Covered. A system that bills people for staying functional is not care.",
+  },
+  {
+    title: "Disabled people are not an afterthought.",
+    body: "Design for disabled people from the first draft — buildings, events, websites, policy — not as a retrofit when someone complains.",
+  },
+  {
+    title: "Impact over intent.",
+    body: "If the impact is negative, accountability is required. Good intentions do not cancel the harm.",
+  },
+  {
+    title: "Neurodivergence belongs in every sector.",
+    body: "Especially education and employment. If those rooms cannot hold neurodivergent people, the rooms are wrong.",
+  },
+  {
+    title: "Move military money to healthcare.",
+    body: "Military expenditure should be redirected toward keeping people alive and well. That is the better use of public funds.",
+  },
+  {
+    title: "Restorative over punitive.",
+    body: "Restorative justice is more effective than punishment-first systems. Repair should be the default, not the exception.",
+  },
+  {
+    title: "BBIA people deserve better systems.",
+    body: "Justice systems, social systems, and economic systems currently fail BBIA individuals. That is a design failure, not an accident.",
+  },
+  {
+    title: "Rehabilitation beats prison.",
+    body: "Rehabilitation is almost always a better option than a prison sentence. Locking people away is not the same as reducing harm.",
+  },
+  {
+    title: "Target recidivism.",
+    body: "Combating recidivism should be one of the main jobs of a justice system. If people cycle back through, the system did not work.",
+  },
+  {
+    title: "The most impacted should lead.",
+    body: "Genuine change comes from uplifting marginalized voices and letting the people most affected set the direction.",
+  },
+  {
+    title: "Vulnerability is produced.",
+    body: "BBIA people are not inherently fragile. Systemic injustice, inequality, and bias make them more vulnerable. Name the system.",
+  },
+  {
+    title: "Neurodivergence is not a moral score.",
+    body: "It does not make someone a good person or a bad person. There are good and bad neurodivergent people, same as anyone else.",
+  },
+  {
+    title: "Aspie supremacy is ableism.",
+    body: "Ranking autistic people by how palatable they look to non-disabled systems is still ableism. It is not pride.",
+  },
+  {
+    title: "Neurodivergence is not an exemption.",
+    body: "It does not cancel mistakes. It does not cancel accountability. Support and responsibility can exist in the same sentence.",
+  },
+  {
+    title: "Disability is not a bad word.",
+    body: "Do not replace it with euphemisms to make other people more comfortable. The word is accurate. Use it.",
+  },
+  {
+    title: "Advocacy is valid in every format.",
+    body: "Verbal, AAC, sign, writing, whatever actually works. The method is not a hierarchy. The skill is essential.",
+  },
+  {
+    title: "Teach life, not only exams.",
+    body: "K–12 should include cooking, driving, cleaning, money, communication, and literacy as real skills — not extras if there is time.",
+  },
+  {
+    title: "Education should not be for profit.",
+    body: "Schools and universities extracting profit from students are not serving the public. Education is not a product line.",
+  },
+  {
+    title: "Educators need mental health and neurodiversity literacy.",
+    body: "Basic mental health knowledge and neurodiversity knowledge should be part of the job, not an optional workshop.",
+  },
+  {
+    title: "University is not the only valid path.",
+    body: "Tertiary education is one route after high school, not the only respectable one. Other paths are still education.",
+  },
+  {
+    title: "Suitable education is a right.",
+    body: "All people deserve access to education that actually fits them — not a single track that only some can survive.",
+  },
+  {
+    title: "Necessary aids should never be a bill.",
+    body: "Disabled people should not pay for the tools they need to live. If it is necessary, it should be covered.",
+  },
 ];

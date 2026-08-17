@@ -9,8 +9,8 @@ export default function Takes() {
         <p className="eyebrow">Hot takes</p>
         <h1>Working opinions, not a manifesto</h1>
         <p className="lede">
-          How I actually run rooms, websites, and teams. Sharper versions of
-          things already on this site — not a new personality.
+          How I actually run rooms, websites, and teams — and the systems I
+          think those rooms should sit inside.
         </p>
       </header>
 
