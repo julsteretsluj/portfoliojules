@@ -39,7 +39,7 @@ function RevealImageListItem({ text, images = [] }: RevealImageListItemProps) {
   return (
     <div
       className={cn(
-        "group/reveal reveal-image-item relative h-fit w-fit overflow-visible py-5",
+        "group/reveal reveal-image-item relative h-fit w-fit overflow-visible py-2 pr-14",
         open && "is-open",
       )}
       tabIndex={0}

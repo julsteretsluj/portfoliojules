@@ -57,9 +57,7 @@ export default function About() {
 
       <section className="lived-row reveal from-up">
         <h2>Countries lived & studied in</h2>
-        <p className="lived-hint">
-          Hover a country. Photos will appear here once they’re in.
-        </p>
+        <p className="lived-hint">Hover a country.</p>
         <RevealImageList
           items={livedIn.map((place) => ({
             text: place.country,

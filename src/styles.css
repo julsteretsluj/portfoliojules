@@ -1297,9 +1297,11 @@ main {
 
 .reveal-image-list {
   display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  padding: 0.4rem 0 0.8rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 1.6rem;
+  row-gap: 0.35rem;
+  padding: 0.35rem 0 1.6rem;
 }
 
 .reveal-image-item {
@@ -1307,20 +1309,12 @@ main {
   cursor: default;
 }
 
-.reveal-image-item:nth-child(even) {
-  margin-left: 1.4rem;
-}
-
-.reveal-image-item:nth-child(3n) {
-  margin-left: 0.55rem;
-}
-
 .reveal-image-name {
   margin: 0;
-  font-size: clamp(2.05rem, 5vw, 3.35rem);
+  font-size: clamp(1.35rem, 3.1vw, 2.05rem);
   font-weight: 600;
   letter-spacing: -0.03em;
-  line-height: 1.05;
+  line-height: 1.2;
   color: var(--ink);
   transition: opacity 500ms ease;
 }
@@ -1345,11 +1339,11 @@ main {
 
 .reveal-image-stack {
   position: absolute;
-  right: 1.4rem;
-  top: -0.2rem;
+  right: 0.15rem;
+  top: -0.55rem;
   z-index: 4;
-  width: 4.6rem;
-  height: 6rem;
+  width: 3.4rem;
+  height: 4.4rem;
   transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: 80ms;
 }
@@ -1932,11 +1926,6 @@ balloons {
     width: min(148px, 42vw);
     margin-top: 0.2rem;
     justify-self: start;
-  }
-
-  .reveal-image-item:nth-child(even),
-  .reveal-image-item:nth-child(3n) {
-    margin-left: 0;
   }
 
   .menu-btn {
