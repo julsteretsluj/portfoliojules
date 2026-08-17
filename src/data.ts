@@ -512,6 +512,19 @@ export const passportStamps: Record<
     src: "/images/stamp-netherlands.png",
     alt: "Vintage Dutch postage stamp of a girl from Marken",
   },
+  "New Zealand": {
+    src: "/images/stamp-new-zealand.png",
+    alt: "New Zealand postage stamp of a kākāpō among ferns",
+  },
+  "Saint Kitts and Nevis": {
+    src: "/images/stamp-saint-kitts-and-nevis.png",
+    alt: "St. Kitts postage stamp of batik designs with two women and fruit",
+  },
+  "Saint-Martin": {
+    src: "/images/stamp-saint-martin.png",
+    alt: "St. Maarten postage stamp of Princess Juliana International Airport",
+    wide: true,
+  },
 };
 
 export const passions = [
