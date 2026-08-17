@@ -250,9 +250,49 @@ export type LivedPlace = {
 };
 
 export const livedIn: LivedPlace[] = [
-  { country: "Thailand" },
+  {
+    country: "Thailand",
+    images: [
+      {
+        src: "/images/lived/thailand-3.jpg",
+        alt: "Wat Arun across the Chao Phraya River at sunset",
+      },
+      {
+        src: "/images/lived/thailand-1.jpg",
+        alt: "The Grand Palace and Wat Phra Kaew at golden hour, with tuk-tuks on the street",
+      },
+      {
+        src: "/images/lived/thailand-2.jpg",
+        alt: "Neon signs and traffic on Yaowarat Road in Bangkok’s Chinatown",
+      },
+      {
+        src: "/images/lived/thailand-4.jpg",
+        alt: "Bangkok skyline along the Chao Phraya River at golden hour",
+      },
+    ],
+  },
   { country: "Singapore" },
-  { country: "Netherlands" },
+  {
+    country: "Netherlands",
+    images: [
+      {
+        src: "/images/lived/netherlands-2.jpg",
+        alt: "Bicycles on an Amsterdam canal bridge, with gabled houses beyond",
+      },
+      {
+        src: "/images/lived/netherlands-1.jpg",
+        alt: "An Amsterdam canal bridge at twilight, arches lit over the water",
+      },
+      {
+        src: "/images/lived/netherlands-4.jpg",
+        alt: "Canal houses and boats on the Singel, with the Munttoren in the distance",
+      },
+      {
+        src: "/images/lived/netherlands-3.jpg",
+        alt: "Aerial view of Amsterdam’s concentric canal ring",
+      },
+    ],
+  },
   {
     country: "New Zealand",
     images: [
