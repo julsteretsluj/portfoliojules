@@ -680,8 +680,9 @@ main {
 
 .hero {
   position: relative;
-  overflow: visible;
-  padding: 3.4rem 0 2.6rem;
+  overflow: hidden;
+  padding: clamp(2.8rem, 6vw, 4rem) 0 clamp(2.4rem, 5vw, 3.2rem);
+  min-height: clamp(34rem, 92vh, 52rem);
 }
 
 .hero::before {
@@ -693,19 +694,36 @@ main {
   z-index: 0;
 }
 
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(245, 245, 247, 0.98) 0%,
+    rgba(245, 245, 247, 0.88) 38%,
+    rgba(245, 245, 247, 0.2) 58%,
+    transparent 72%
+  );
+  z-index: 2;
+}
+
 .hero-inner {
   position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 176px;
-  align-items: center;
-  gap: 1.1rem 2rem;
+  z-index: 3;
+  display: block;
+  width: min(980px, calc(100% - 2.4rem));
+  margin-inline: auto;
+  padding-right: clamp(0rem, 8vw, 4rem);
 }
 
 .hero-copy {
   text-align: left;
-  width: auto;
+  width: min(36rem, calc(100% - clamp(7rem, 34vw, 16rem)));
   margin: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-copy .lede {
@@ -717,6 +735,99 @@ main {
   text-align: center;
   padding: 3.2rem 0 1.4rem;
   max-width: 720px;
+}
+
+.skills-head {
+  text-align: left;
+  padding: 0;
+  max-width: none;
+}
+
+.skills-head .lede {
+  margin-inline: 0;
+  max-width: 34rem;
+}
+
+.hero-star {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+  width: clamp(28rem, 88vh, 50rem);
+  height: clamp(28rem, 88vh, 50rem);
+  margin: 0;
+  transform: translate(50%, -50%);
+  pointer-events: none;
+}
+
+.hero-star-shape {
+  display: block;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  transform-origin: 50% 50%;
+}
+
+.passions-head {
+  text-align: left;
+  padding: 0;
+  max-width: none;
+}
+
+.passions-head .lede {
+  margin-inline: 0;
+  max-width: 34rem;
+}
+
+.hero-heart {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+  width: clamp(28rem, 88vh, 50rem);
+  height: clamp(28rem, 88vh, 50rem);
+  margin: 0;
+  transform: translate(50%, -50%);
+  pointer-events: none;
+}
+
+.hero-heart-shape {
+  display: block;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  transform-origin: 50% 50%;
+}
+
+.now-head {
+  text-align: left;
+  padding: 0;
+  max-width: none;
+}
+
+.now-head .lede {
+  margin-inline: 0;
+  max-width: 34rem;
+}
+
+.hero-arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+  width: clamp(28rem, 88vh, 50rem);
+  height: clamp(28rem, 88vh, 50rem);
+  margin: 0;
+  transform: translate(50%, -50%);
+  pointer-events: none;
+}
+
+.hero-arrow-shape {
+  display: block;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  transform-origin: 50% 50%;
 }
 
 .hero-title {
@@ -784,35 +895,42 @@ main {
 }
 
 .hero-photo {
-  position: relative;
-  z-index: 2;
-  width: 176px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+  width: auto;
+  height: clamp(34rem, 96vh, 56rem);
   margin: 0;
-  justify-self: end;
+  transform: translate(50%, -50%);
+  pointer-events: none;
 }
 
 .hero-photo-frame {
   position: relative;
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(29, 29, 31, 0.08);
-  transition: box-shadow 0.35s ease;
+  height: 100%;
+  overflow: visible;
+  border-radius: 0;
+  box-shadow: none;
   cursor: none;
+  pointer-events: auto;
 }
 
 .hero-photo-frame:hover,
 .hero-photo-frame.is-hovering {
-  box-shadow: 0 14px 32px rgba(29, 29, 31, 0.14);
+  box-shadow: none;
 }
 
 .hero-photo-shot {
-  width: 100%;
+  display: block;
+  width: auto;
   height: 100%;
-  object-fit: cover;
-  object-position: 50% 18%;
+  max-width: none;
+  object-fit: contain;
+  object-position: center bottom;
   will-change: transform;
   pointer-events: none;
+  filter: drop-shadow(0 28px 48px rgba(29, 29, 31, 0.16));
 }
 
 .hero-magnifier {
@@ -830,8 +948,22 @@ main {
 .hero-magnifier img {
   display: block;
   max-width: none;
-  object-fit: cover;
-  object-position: 50% 18%;
+  object-fit: contain;
+  object-position: center bottom;
+  pointer-events: none;
+}
+
+.hero-photo figcaption {
+  position: absolute;
+  left: auto;
+  right: calc(100% + 0.75rem);
+  bottom: 1.4rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  transform: none;
   pointer-events: none;
 }
 
@@ -854,13 +986,6 @@ main {
 
 html.has-hero-photo-hover .liquid-cursor {
   opacity: 0 !important;
-}
-
-.hero-photo figcaption {
-  margin-top: 0.55rem;
-  color: var(--muted);
-  font-size: 0.78rem;
-  line-height: 1.35;
 }
 
 .band {
@@ -902,6 +1027,13 @@ html.has-hero-photo-hover .liquid-cursor {
 .tile-grid li {
   display: grid;
   gap: 0.2rem;
+}
+
+.tile-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  margin-bottom: 0.35rem;
 }
 
 .tile-grid span {
@@ -2147,15 +2279,55 @@ balloons {
 }
 
 @media (max-width: 860px) {
+  .hero {
+    min-height: clamp(30rem, 88vh, 42rem);
+    padding-top: 2.4rem;
+  }
+
   .hero-inner {
-    grid-template-columns: 1fr;
-    gap: 1.4rem;
+    padding-right: 0;
+  }
+
+  .hero-copy {
+    width: min(22rem, calc(100% - 5.5rem));
   }
 
   .hero-photo {
-    width: min(148px, 42vw);
-    margin-top: 0.2rem;
-    justify-self: start;
+    height: clamp(26rem, 78vh, 38rem);
+    top: auto;
+    bottom: -1.5rem;
+    transform: translate(46%, 0);
+  }
+
+  .hero-photo figcaption {
+    bottom: 1.2rem;
+    left: auto;
+    right: calc(100% + 0.4rem);
+    transform: none;
+  }
+
+  .hero-star {
+    width: clamp(22rem, 72vh, 34rem);
+    height: clamp(22rem, 72vh, 34rem);
+    top: auto;
+    bottom: -1.5rem;
+    transform: translate(46%, 0);
+  }
+
+  .hero-heart {
+    width: clamp(22rem, 72vh, 34rem);
+    height: clamp(22rem, 72vh, 34rem);
+    top: auto;
+    bottom: -1.5rem;
+    transform: translate(46%, 0);
+  }
+
+  .hero-arrow {
+    width: clamp(22rem, 72vh, 34rem);
+    height: clamp(22rem, 72vh, 34rem);
+    top: auto;
+    bottom: -1.5rem;
+    transform: translate(46%, 0);
   }
 
   .menu-btn {

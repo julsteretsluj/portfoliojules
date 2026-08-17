@@ -23,7 +23,7 @@ import {
 
 registerMotion();
 
-const HERO_PHOTO = "/images/profile-hero.png";
+const HERO_PHOTO = "/images/jules-minifig.png";
 const MAGNIFIER_SIZE = 96;
 const MAGNIFIER_ZOOM = 1.9;
 
@@ -69,9 +69,9 @@ function HeroPhoto() {
         <img
           className="hero-photo-shot"
           src={HERO_PHOTO}
-          width={352}
-          height={440}
-          alt="Jules Kitto-Astrop in a black blazer with a pounamu necklace, New Zealand flag behind"
+          width={819}
+          height={1024}
+          alt="LEGO minifigure of Jules Kitto-Astrop in a black blazer with a pounamu necklace"
         />
         {hover ? (
           <div
@@ -86,8 +86,8 @@ function HeroPhoto() {
             <img
               src={HERO_PHOTO}
               alt=""
-              width={352}
-              height={440}
+              width={819}
+              height={1024}
               style={{
                 width: hover.w * MAGNIFIER_ZOOM,
                 height: hover.h * MAGNIFIER_ZOOM,
@@ -167,13 +167,14 @@ export default function Home() {
 
       if (photo && hero && photoWrap) {
         gsap.from(photoWrap, {
-          clipPath: "inset(8% 7% 10% 7% round 14px)",
+          xPercent: 18,
+          opacity: 0,
           duration: 1.2,
           ease: "expo.out",
         });
         gsap.from(photo, {
-          scale: 1.16,
-          y: 36,
+          scale: 1.08,
+          y: 28,
           duration: 1.25,
           ease: "expo.out",
         });
@@ -242,6 +243,7 @@ export default function Home() {
     <div ref={root}>
       <section className="hero">
         <MotionField />
+        <HeroPhoto />
         <div className="hero-inner">
           <div className="hero-copy">
             <p className="eyebrow">Phnom Penh · New Zealander</p>
@@ -283,7 +285,6 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <HeroPhoto />
         </div>
       </section>
 
@@ -293,6 +294,9 @@ export default function Home() {
           <ul className="tile-grid" aria-label="Recorded roles">
             {roles.map((role) => (
               <li key={`${role.title}-${role.org}`}>
+                {role.logo ? (
+                  <img className="tile-logo" src={role.logo} alt="" />
+                ) : null}
                 <strong>{role.title}</strong>
                 <span>{role.org}</span>
               </li>
