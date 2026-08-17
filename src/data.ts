@@ -608,23 +608,23 @@ export const takes = [
   },
   {
     title: "A council with actual teeth.",
-    body: "The world would be better with a universal council acting in the best interest of all people, with legal authority over nations. That means action against war crimes — especially by people in power — healthcare access that local permission currently blocks, a shared language taught alongside mother tongues, and equity, unity, and diversity held at the same time. Members should be elected democratically, swear an oath to do no harm, and be punished if they break the rules of the job.",
+    body: "The world would be better with a universal council acting in the best interest of all people, with legal authority over nations — including action against war crimes, healthcare access that local permission currently blocks, and a shared language taught alongside mother tongues. Members should be elected democratically, swear an oath to do no harm, and be punished if they break the rules of the job.",
   },
   {
     title: "Education should be free.",
-    body: "Covered. Not a luxury product. If access depends on who can pay, it is not a public good.",
+    body: "Education should be covered, not sold as a luxury product. If access depends on who can pay, it is not a public good.",
   },
   {
     title: "Healthcare should be free.",
-    body: "Covered. People should not have to qualify financially to stay alive or get well.",
+    body: "Healthcare should be covered. People should not have to qualify financially to stay alive or get well.",
   },
   {
     title: "Mental health is health.",
-    body: "It is not a side category of physical health. Treat it with the same seriousness, funding, and urgency.",
+    body: "Mental health is not a side category of physical health. Treat it with the same seriousness, funding, and urgency.",
   },
   {
     title: "Mental health care should be free.",
-    body: "Covered. A system that bills people for staying functional is not care.",
+    body: "Mental health care should be covered. A system that bills people for staying functional is not care.",
   },
   {
     title: "Disabled people are not an afterthought.",
@@ -636,7 +636,7 @@ export const takes = [
   },
   {
     title: "Neurodivergence belongs in every sector.",
-    body: "Especially education and employment. If those rooms cannot hold neurodivergent people, the rooms are wrong.",
+    body: "Neurodivergence belongs in every sector, especially education and employment. If those rooms cannot hold neurodivergent people, the rooms are wrong.",
   },
   {
     title: "Move military money to healthcare.",
@@ -668,7 +668,7 @@ export const takes = [
   },
   {
     title: "Neurodivergence is not a moral score.",
-    body: "It does not make someone a good person or a bad person. There are good and bad neurodivergent people, same as anyone else.",
+    body: "Neurodivergence does not make someone a good person or a bad person. There are good and bad neurodivergent people, same as anyone else.",
   },
   {
     title: "Aspie supremacy is ableism.",
@@ -676,15 +676,15 @@ export const takes = [
   },
   {
     title: "Neurodivergence is not an exemption.",
-    body: "It does not cancel mistakes. It does not cancel accountability. Support and responsibility can exist in the same sentence.",
+    body: "Neurodivergence does not cancel mistakes, and it does not cancel accountability. Support and responsibility can exist in the same sentence.",
   },
   {
     title: "Disability is not a bad word.",
-    body: "Do not replace it with euphemisms to make other people more comfortable. The word is accurate. Use it.",
+    body: "Do not replace disability with euphemisms to make other people more comfortable. The word is accurate. Use it.",
   },
   {
     title: "Advocacy is valid in every format.",
-    body: "Verbal, AAC, sign, writing, whatever actually works. The method is not a hierarchy. The skill is essential.",
+    body: "Advocacy can be verbal, AAC, sign, writing, or whatever actually works. The method is not a hierarchy. The skill is essential.",
   },
   {
     title: "Teach life, not only exams.",

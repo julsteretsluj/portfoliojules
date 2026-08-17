@@ -7,7 +7,6 @@ import MotionField from "../components/MotionField";
 import { ChromaticLensEffect } from "@/components/ui/chromatic-lens";
 import { Globe } from "@/components/ui/globe";
 import { MorphingText } from "@/components/ui/morphing-text";
-import { SparklesText } from "@/components/ui/sparkles-text";
 import { SocialLinks } from "@/components/ui/social-links";
 import { TextColor } from "@/components/ui/text-color";
 import { BreathingText } from "@/components/ui/breathing-text";
@@ -89,29 +88,22 @@ export default function Home() {
   useGSAP(
     () => {
       if (prefersReducedMotion()) return;
-      const title = root.current?.querySelector(".hero-title .sparkles-text-label");
+      const title = root.current?.querySelector(".hero-title img");
       const photo = root.current?.querySelector(".hero-photo img");
       const photoWrap = root.current?.querySelector(".hero-photo-frame");
       const tiles = root.current?.querySelectorAll(".tile-grid li");
       const quote = root.current?.querySelector(".quote-band blockquote");
       const hero = root.current?.querySelector(".hero");
-      if (!title) return;
 
-      const split = SplitText.create(title, {
-        type: "chars,words",
-        charsClass: "char",
-        wordsClass: "word",
-        tag: "span",
-      });
-      gsap.set(split.chars, { transformOrigin: "50% 100%" });
-      gsap.from(split.chars, {
-        opacity: 0,
-        y: 36,
-        rotateX: -55,
-        duration: 0.72,
-        stagger: 0.02,
-        ease: "expo.out",
-      });
+      if (title) {
+        gsap.from(title, {
+          opacity: 0,
+          y: 18,
+          scale: 0.96,
+          duration: 0.85,
+          ease: "expo.out",
+        });
+      }
 
       if (photo && hero && photoWrap) {
         gsap.from(photoWrap, {
@@ -179,7 +171,6 @@ export default function Home() {
       });
 
       return () => {
-        split.revert();
         quoteSplit?.revert();
         mm.revert();
       };
@@ -194,9 +185,15 @@ export default function Home() {
         <div className="hero-inner">
           <div className="hero-copy">
             <p className="eyebrow">Phnom Penh · New Zealander</p>
-            <SparklesText as="h1" className="hero-title">
-              Jules Kitto-Astrop
-            </SparklesText>
+            <h1 className="hero-title">
+              <img
+                src="/images/jules-wordmark.png"
+                alt=""
+                width={420}
+                height={96}
+              />
+              <span className="hero-name">Jules Kitto-Astrop</span>
+            </h1>
             <div className="hero-sub">
               <span className="sr-only">
                 Student leader. Event coordinator. Digital builder.
