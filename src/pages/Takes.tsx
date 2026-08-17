@@ -1,32 +1,46 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { takes } from "../data";
 import { cn } from "@/lib/utils";
 
+function wrapIndex(index: number, count: number) {
+  return ((index % count) + count) % count;
+}
+
+function signedOffset(index: number, active: number, count: number) {
+  let delta = index - active;
+  const half = count / 2;
+  if (delta > half) delta -= count;
+  if (delta < -half) delta += count;
+  return delta;
+}
+
 export default function Takes() {
-  const allTakes = takes;
-  const n = allTakes.length;
+  const count = takes.length;
   const [activeIndex, setActiveIndex] = useState(0);
-  const galleryRef = useRef<HTMLDivElement>(null);
-  const [radius, setRadius] = useState(180);
+  const active = takes[activeIndex];
+
+  const goTo = useCallback(
+    (index: number) => {
+      setActiveIndex(wrapIndex(index, count));
+    },
+    [count],
+  );
 
   useEffect(() => {
-    const el = galleryRef.current;
-    if (!el) return;
-
-    const measure = () => {
-      const w = el.getBoundingClientRect().width;
-      // Keep the carousel legible on small screens.
-      const next = Math.max(120, Math.min(220, w * 0.38));
-      setRadius(next);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goTo(activeIndex - 1);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goTo(activeIndex + 1);
+      }
     };
-
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const yRadius = useMemo(() => radius * 0.58, [radius]);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeIndex, goTo]);
 
   return (
     <>
@@ -39,57 +53,88 @@ export default function Takes() {
         </p>
       </header>
 
-      <div className="takes-gallery-wrap" data-reveal>
-        <div
-          ref={galleryRef}
-          className="takes-gallery"
-          role="list"
-          aria-label="Hot takes circular gallery"
-        >
-          {allTakes.map((take, idx) => {
-            const step = (Math.PI * 2) / n;
-            const diff = idx - activeIndex;
-            // Put the active card at the "top" of the carousel.
-            const angle = diff * step - Math.PI / 2;
-            const x = Math.cos(angle) * radius;
-            const y = Math.sin(angle) * yRadius;
+      <section className="takes-gallery-wrap" data-reveal>
+        <div className="takes-stage">
+          <button
+            type="button"
+            className="takes-arrow"
+            aria-label="Previous take"
+            onClick={() => goTo(activeIndex - 1)}
+          >
+            <CaretLeft size={22} weight="bold" aria-hidden="true" />
+          </button>
 
-            const cyclicDistance = Math.min(
-              (idx - activeIndex + n) % n,
-              (activeIndex - idx + n) % n,
-            );
+          <div className="takes-gallery" aria-label="Hot takes gallery">
+            {takes.map((take, index) => {
+              const offset = signedOffset(index, activeIndex, count);
+              const distance = Math.abs(offset);
+              if (distance > 2) return null;
 
-            const isActive = idx === activeIndex;
-            const scale = isActive ? 1.06 : Math.max(0.78, 0.88 - cyclicDistance * 0.03);
-            const opacity = isActive ? 1 : Math.max(0.35, 1 - cyclicDistance * 0.1);
-            const zIndex = 2000 - cyclicDistance * 10;
+              const isActive = index === activeIndex;
+              const x = offset * 148;
+              const y = distance * 10;
+              const scale = isActive ? 1 : 0.82 - distance * 0.06;
+              const rotate = offset * -11;
 
-            return (
-              <button
-                key={take.title}
-                type="button"
-                role="listitem"
-                aria-label={`Hot take ${String(idx + 1).padStart(2, "0")}: ${take.title}`}
-                className={cn(
-                  "take-gallery-card",
-                  isActive && "is-active",
-                )}
-                style={{
-                  transform: `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${scale})`,
-                  opacity,
-                  zIndex,
-                }}
-                onMouseEnter={() => setActiveIndex(idx)}
-                onFocus={() => setActiveIndex(idx)}
-              >
-                <p className="take-gallery-n">{String(idx + 1).padStart(2, "0")}</p>
-                <h2 className="take-gallery-title">{take.title}</h2>
-                <p className="take-gallery-body">{take.body}</p>
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={take.title}
+                  type="button"
+                  className={cn("take-gallery-card", isActive && "is-active")}
+                  style={{
+                    transform: `translate(-50%, -50%) translate(${x}px, ${y}px) rotateY(${rotate}deg) scale(${scale})`,
+                    zIndex: 20 - distance,
+                    opacity: isActive ? 1 : 0.38,
+                  }}
+                  tabIndex={isActive ? 0 : -1}
+                  aria-current={isActive ? "true" : undefined}
+                  aria-label={`Take ${String(index + 1).padStart(2, "0")}: ${take.title}`}
+                  onClick={() => goTo(index)}
+                >
+                  <p className="take-gallery-n">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  {isActive ? (
+                    <>
+                      <h2 className="take-gallery-title">{take.title}</h2>
+                      <p className="take-gallery-body">{take.body}</p>
+                    </>
+                  ) : null}
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            type="button"
+            className="takes-arrow"
+            aria-label="Next take"
+            onClick={() => goTo(activeIndex + 1)}
+          >
+            <CaretRight size={22} weight="bold" aria-hidden="true" />
+          </button>
         </div>
-      </div>
+
+        <div className="takes-rotate">
+          <label className="sr-only" htmlFor="takes-rotate-bar">
+            Rotate through hot takes
+          </label>
+          <input
+            id="takes-rotate-bar"
+            className="takes-rotate-bar"
+            type="range"
+            min={0}
+            max={count - 1}
+            step={1}
+            value={activeIndex}
+            onChange={(event) => goTo(Number(event.target.value))}
+            aria-valuetext={`${activeIndex + 1} of ${count}: ${active.title}`}
+          />
+          <p className="takes-rotate-count" aria-live="polite">
+            {String(activeIndex + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+          </p>
+        </div>
+      </section>
     </>
   );
 }

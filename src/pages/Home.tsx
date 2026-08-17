@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
-import { useEffect, useRef, type SVGProps } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { createPortal } from "react-dom";
 import { useGSAP } from "@gsap/react";
 import CopyEmail from "../components/CopyEmail";
 import Magnetic from "../components/Magnetic";
 import MotionField from "../components/MotionField";
-import { ChromaticLensEffect } from "@/components/ui/chromatic-lens";
 import { Globe } from "@/components/ui/globe";
 import { MorphingText } from "@/components/ui/morphing-text";
 import { SocialLinks } from "@/components/ui/social-links";
 import { TextColor } from "@/components/ui/text-color";
 import { BreathingText } from "@/components/ui/breathing-text";
-import { Cursor } from "@/components/ui/cursor";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import { launchBalloons } from "@/components/ui/balloons";
 import { fireConfettiFrom, launchSideCannons } from "@/components/ui/confetti";
@@ -24,32 +23,93 @@ import {
 
 registerMotion();
 
-function MouseIcon(props: SVGProps<SVGSVGElement>) {
+const HERO_PHOTO = "/images/profile-hero.png";
+const MAGNIFIER_SIZE = 96;
+const MAGNIFIER_ZOOM = 1.9;
+
+function HeroPhoto() {
+  const frameRef = useRef<HTMLDivElement>(null);
+  const [hover, setHover] = useState<{
+    x: number;
+    y: number;
+    px: number;
+    py: number;
+    w: number;
+    h: number;
+  } | null>(null);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("has-hero-photo-hover", Boolean(hover));
+    return () => {
+      document.documentElement.classList.remove("has-hero-photo-hover");
+    };
+  }, [hover]);
+
+  const track = (event: PointerEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setHover({
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+      px: event.clientX,
+      py: event.clientY,
+      w: rect.width,
+      h: rect.height,
+    });
+  };
+
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={26}
-      height={31}
-      fill="none"
-      {...props}
-    >
-      <g clipPath="url(#jules-cursor)">
-        <path
-          fill="#0071E3"
-          fillRule="evenodd"
-          stroke="#fff"
-          strokeLinecap="square"
-          strokeWidth={2}
-          d="M21.993 14.425 2.549 2.935l4.444 23.108 4.653-10.002z"
-          clipRule="evenodd"
+    <figure className="hero-photo">
+      <div
+        ref={frameRef}
+        className={`hero-photo-frame${hover ? " is-hovering" : ""}`}
+        onPointerEnter={track}
+        onPointerMove={track}
+        onPointerLeave={() => setHover(null)}
+      >
+        <img
+          className="hero-photo-shot"
+          src={HERO_PHOTO}
+          width={352}
+          height={440}
+          alt="Jules Kitto-Astrop in a black blazer with a pounamu necklace, New Zealand flag behind"
         />
-      </g>
-      <defs>
-        <clipPath id="jules-cursor">
-          <path fill="#0071E3" d="M0 0h26v31H0z" />
-        </clipPath>
-      </defs>
-    </svg>
+        {hover ? (
+          <div
+            className="hero-magnifier"
+            style={{
+              width: MAGNIFIER_SIZE,
+              height: MAGNIFIER_SIZE,
+              left: hover.x,
+              top: hover.y,
+            }}
+          >
+            <img
+              src={HERO_PHOTO}
+              alt=""
+              width={352}
+              height={440}
+              style={{
+                width: hover.w * MAGNIFIER_ZOOM,
+                height: hover.h * MAGNIFIER_ZOOM,
+                transform: `translate(${-hover.x * MAGNIFIER_ZOOM + MAGNIFIER_SIZE / 2}px, ${-hover.y * MAGNIFIER_ZOOM + MAGNIFIER_SIZE / 2}px)`,
+              }}
+            />
+          </div>
+        ) : null}
+      </div>
+      {hover
+        ? createPortal(
+            <div
+              className="hero-hover-chip"
+              style={{ left: hover.px, top: hover.py }}
+            >
+              Phnom Penh
+            </div>,
+            document.body,
+          )
+        : null}
+      <figcaption>Phnom Penh · hover the photo</figcaption>
+    </figure>
   );
 }
 
@@ -89,7 +149,7 @@ export default function Home() {
     () => {
       if (prefersReducedMotion()) return;
       const title = root.current?.querySelector(".hero-title img");
-      const photo = root.current?.querySelector(".hero-photo img");
+      const photo = root.current?.querySelector(".hero-photo-shot");
       const photoWrap = root.current?.querySelector(".hero-photo-frame");
       const tiles = root.current?.querySelectorAll(".tile-grid li");
       const quote = root.current?.querySelector(".quote-band blockquote");
@@ -223,48 +283,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <figure className="hero-photo">
-            <div className="hero-photo-frame">
-              <Cursor
-                attachToParent
-                variants={{
-                  initial: { scale: 0.3, opacity: 0 },
-                  animate: { scale: 1, opacity: 1 },
-                  exit: { scale: 0.3, opacity: 0 },
-                }}
-                transition={{ ease: "easeInOut", duration: 0.15 }}
-              >
-                <div className="cursor-follow">
-                  <MouseIcon className="h-6 w-6" />
-                  <span className="cursor-chip">Phnom Penh</span>
-                </div>
-              </Cursor>
-              <img
-                src="/images/profile-hero.png"
-                width={352}
-                height={440}
-                alt="Jules Kitto-Astrop in a black blazer with a pounamu necklace, New Zealand flag behind"
-              />
-              <div className="hero-lens" aria-hidden="true">
-                <ChromaticLensEffect
-                  image={{ src: "/images/profile-hero.png" }}
-                  width="100%"
-                  height="100%"
-                  cursorStyle="none"
-                  usePixelSize
-                  lensWidthPixels={92}
-                  lensHeightPixels={92}
-                  radius={0.38}
-                  lensStrength={1.85}
-                  aberrationStrength={0.72}
-                  enableWobble
-                  wobbleStrength={0.55}
-                  lensOnly
-                />
-              </div>
-            </div>
-            <figcaption>Phnom Penh · hover the photo</figcaption>
-          </figure>
+          <HeroPhoto />
         </div>
       </section>
 
