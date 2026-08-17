@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { launchBalloons } from "./ui/balloons";
+import { fireConfettiFrom } from "./ui/confetti";
 import { email } from "../data";
 
 export default function CopyEmail() {
   const [copied, setCopied] = useState(false);
 
-  async function copy() {
+  async function copy(event: MouseEvent<HTMLButtonElement>) {
     launchBalloons();
+    fireConfettiFrom(event.currentTarget);
     try {
       await navigator.clipboard.writeText(email);
       setCopied(true);

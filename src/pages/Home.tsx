@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type SVGProps } from "react";
 import { useGSAP } from "@gsap/react";
 import CopyEmail from "../components/CopyEmail";
 import Magnetic from "../components/Magnetic";
@@ -11,8 +11,10 @@ import { SparklesText } from "@/components/ui/sparkles-text";
 import { SocialLinks } from "@/components/ui/social-links";
 import { TextColor } from "@/components/ui/text-color";
 import { BreathingText } from "@/components/ui/breathing-text";
+import { Cursor } from "@/components/ui/cursor";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import { launchBalloons } from "@/components/ui/balloons";
+import { fireConfettiFrom, launchSideCannons } from "@/components/ui/confetti";
 import { email, roles, socials } from "../data";
 import {
   gsap,
@@ -23,23 +25,65 @@ import {
 
 registerMotion();
 
+function MouseIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={26}
+      height={31}
+      fill="none"
+      {...props}
+    >
+      <g clipPath="url(#jules-cursor)">
+        <path
+          fill="#0071E3"
+          fillRule="evenodd"
+          stroke="#fff"
+          strokeLinecap="square"
+          strokeWidth={2}
+          d="M21.993 14.425 2.549 2.935l4.444 23.108 4.653-10.002z"
+          clipRule="evenodd"
+        />
+      </g>
+      <defs>
+        <clipPath id="jules-cursor">
+          <path fill="#0071E3" d="M0 0h26v31H0z" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
 export default function Home() {
   const root = useRef<HTMLDivElement>(null);
+  const highlights = useRef<HTMLElement>(null);
   const cta = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const el = cta.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        launchBalloons();
-        io.disconnect();
-      },
-      { threshold: 0.4 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
+    const observers: IntersectionObserver[] = [];
+
+    const watch = (
+      el: HTMLElement | null,
+      threshold: number,
+      onEnter: () => void,
+    ) => {
+      if (!el) return;
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry?.isIntersecting) return;
+          onEnter();
+          io.disconnect();
+        },
+        { threshold },
+      );
+      io.observe(el);
+      observers.push(io);
+    };
+
+    watch(highlights.current, 0.45, launchSideCannons);
+    watch(cta.current, 0.4, launchBalloons);
+
+    return () => observers.forEach((io) => io.disconnect());
   }, []);
 
   useGSAP(
@@ -183,6 +227,21 @@ export default function Home() {
         </div>
         <figure className="hero-photo">
           <div className="hero-photo-frame">
+            <Cursor
+              attachToParent
+              variants={{
+                initial: { scale: 0.3, opacity: 0 },
+                animate: { scale: 1, opacity: 1 },
+                exit: { scale: 0.3, opacity: 0 },
+              }}
+              transition={{ ease: "easeInOut", duration: 0.15 }}
+              className="left-12 top-4"
+            >
+              <div className="cursor-follow">
+                <MouseIcon className="h-6 w-6" />
+                <span className="cursor-chip">Phnom Penh</span>
+              </div>
+            </Cursor>
             <img
               src="/images/profile-photo.png"
               alt="Jules Kitto-Astrop in a black blazer with a pounamu necklace, New Zealand flag behind"
@@ -192,7 +251,7 @@ export default function Home() {
                 image={{ src: "/images/profile-photo.png" }}
                 width="100%"
                 height="100%"
-                cursorStyle="crosshair"
+                cursorStyle="none"
               />
             </div>
           </div>
@@ -242,7 +301,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="band" data-reveal>
+      <section ref={highlights} className="band" data-reveal>
         <article className="highlight-card">
           <h2>Highlights</h2>
           <p>
@@ -275,7 +334,13 @@ export default function Home() {
         <div className="hero-actions">
           <Magnetic>
             <LiquidButton asChild size="xl">
-              <a href={`mailto:${email}`} onPointerDown={() => launchBalloons()}>
+              <a
+                href={`mailto:${email}`}
+                onPointerDown={(event) => {
+                  launchBalloons();
+                  fireConfettiFrom(event.currentTarget);
+                }}
+              >
                 Write to Jules
               </a>
             </LiquidButton>

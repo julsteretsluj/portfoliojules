@@ -1,5 +1,6 @@
-import { lazy } from "react";
+import { lazy, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import EntryGate, { shouldShowEntryGate } from "./components/EntryGate";
 import Layout from "./components/Layout";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -10,17 +11,24 @@ const Passions = lazy(() => import("./pages/Passions"));
 const Now = lazy(() => import("./pages/Now"));
 
 export default function App() {
+  const [locked, setLocked] = useState(shouldShowEntryGate);
+
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/experience" element={<Experience />} />
-        <Route path="/skills" element={<Skills />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/passions" element={<Passions />} />
-        <Route path="/now" element={<Now />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Route>
-    </Routes>
+    <>
+      {locked ? <EntryGate onEntered={() => setLocked(false)} /> : null}
+      <div id="site" inert={locked || undefined}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/passions" element={<Passions />} />
+            <Route path="/now" element={<Now />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+        </Routes>
+      </div>
+    </>
   );
 }
