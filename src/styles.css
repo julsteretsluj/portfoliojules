@@ -648,7 +648,7 @@ main {
   padding-top: 2.2rem;
 }
 
-.hero-copy,
+.hero-inner,
 .page-head,
 .band-inner,
 .two-up,
@@ -681,8 +681,7 @@ main {
 .hero {
   position: relative;
   overflow: clip;
-  text-align: center;
-  padding: 3.2rem 0 1.4rem;
+  padding: 3.4rem 0 2.6rem;
 }
 
 .hero::before {
@@ -694,10 +693,24 @@ main {
   z-index: 0;
 }
 
-.hero-copy {
-  text-align: center;
+.hero-inner {
   position: relative;
   z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 176px;
+  align-items: center;
+  gap: 1.1rem 2rem;
+}
+
+.hero-copy {
+  text-align: left;
+  width: auto;
+  margin: 0;
+}
+
+.hero-copy .lede {
+  margin-inline: 0;
+  max-width: 34rem;
 }
 
 .page-head {
@@ -708,6 +721,7 @@ main {
 
 .hero-title {
   perspective: 800px;
+  font-size: clamp(2.05rem, 4.2vw, 3.2rem);
 }
 
 .sparkles-text-label {
@@ -734,6 +748,8 @@ main {
 .hero-morph {
   height: 2.2rem;
   max-width: none;
+  margin-inline: 0;
+  text-align: left;
   font-family: inherit;
   font-size: 1.45rem;
   font-weight: 500;
@@ -745,22 +761,24 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem 1.65rem;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  margin: 1.4rem 0 2.2rem;
+  margin: 1.15rem 0 0;
 }
 
 .hero-photo {
   position: relative;
   z-index: 2;
-  margin: 2.2rem auto 2.4rem;
-  width: min(720px, calc(100% - 2.4rem));
+  width: 176px;
+  margin: 0;
+  justify-self: end;
 }
 
 .hero-photo-frame {
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius-lg);
+  aspect-ratio: 4 / 5;
+  border-radius: 14px;
 }
 
 .hero-lens {
@@ -770,13 +788,17 @@ main {
 
 .hero-photo img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 42% 18%;
   will-change: transform;
 }
 
 .hero-photo figcaption {
-  margin-top: 0.7rem;
+  margin-top: 0.55rem;
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
+  line-height: 1.35;
 }
 
 .band {
@@ -1786,6 +1808,17 @@ balloons {
 }
 
 @media (max-width: 860px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+
+  .hero-photo {
+    width: min(148px, 42vw);
+    margin-top: 0.2rem;
+    justify-self: start;
+  }
+
   .menu-btn {
     display: inline-flex;
   }

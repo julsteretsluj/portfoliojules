@@ -115,7 +115,7 @@ export default function Home() {
 
       if (photo && hero && photoWrap) {
         gsap.from(photoWrap, {
-          clipPath: "inset(10% 9% 14% 9% round 28px)",
+          clipPath: "inset(8% 7% 10% 7% round 14px)",
           duration: 1.2,
           ease: "expo.out",
         });
@@ -191,75 +191,76 @@ export default function Home() {
     <div ref={root}>
       <section className="hero">
         <MotionField />
-        <div className="hero-copy">
-          <p className="eyebrow">Phnom Penh · New Zealander</p>
-          <SparklesText as="h1" className="hero-title">
-            Jules Kitto-Astrop
-          </SparklesText>
-          <div className="hero-sub">
-            <span className="sr-only">
-              Student leader. Event coordinator. Digital builder.
-            </span>
-            <MorphingText
-              className="hero-morph"
-              texts={[
-                "Student leader",
-                "Event coordinator",
-                "Digital builder",
-              ]}
-            />
-          </div>
-          <p className="lede">
-            I organize youth diplomacy experiences, manage complex operations, and
-            build practical digital systems that help teams deliver with clarity.
-          </p>
-          <p className="meta-line">Relocating from Bangkok · currently in Cambodia</p>
-          <div className="hero-actions">
-            <Magnetic>
-              <LiquidButton asChild size="xl">
-                <Link to="/experience">See experience</Link>
-              </LiquidButton>
-            </Magnetic>
-            <Link className="btn btn-ghost" to="/about">
-              Read my story
-            </Link>
-          </div>
-        </div>
-        <figure className="hero-photo">
-          <div className="hero-photo-frame">
-            <Cursor
-              attachToParent
-              variants={{
-                initial: { scale: 0.3, opacity: 0 },
-                animate: { scale: 1, opacity: 1 },
-                exit: { scale: 0.3, opacity: 0 },
-              }}
-              transition={{ ease: "easeInOut", duration: 0.15 }}
-              className="left-12 top-4"
-            >
-              <div className="cursor-follow">
-                <MouseIcon className="h-6 w-6" />
-                <span className="cursor-chip">Phnom Penh</span>
-              </div>
-            </Cursor>
-            <img
-              src="/images/profile-photo.png"
-              alt="Jules Kitto-Astrop in a black blazer with a pounamu necklace, New Zealand flag behind"
-            />
-            <div className="hero-lens" aria-hidden="true">
-              <ChromaticLensEffect
-                image={{ src: "/images/profile-photo.png" }}
-                width="100%"
-                height="100%"
-                cursorStyle="none"
+        <div className="hero-inner">
+          <div className="hero-copy">
+            <p className="eyebrow">Phnom Penh · New Zealander</p>
+            <SparklesText as="h1" className="hero-title">
+              Jules Kitto-Astrop
+            </SparklesText>
+            <div className="hero-sub">
+              <span className="sr-only">
+                Student leader. Event coordinator. Digital builder.
+              </span>
+              <MorphingText
+                className="hero-morph mx-0 text-left"
+                texts={[
+                  "Student leader",
+                  "Event coordinator",
+                  "Digital builder",
+                ]}
               />
             </div>
+            <p className="lede">
+              I organize youth diplomacy experiences, manage complex operations, and
+              build practical digital systems that help teams deliver with clarity.
+            </p>
+            <p className="meta-line">Relocating from Bangkok · currently in Cambodia</p>
+            <div className="hero-actions">
+              <Magnetic>
+                <LiquidButton asChild size="xl">
+                  <Link to="/experience">See experience</Link>
+                </LiquidButton>
+              </Magnetic>
+              <Link className="btn btn-ghost" to="/about">
+                Read my story
+              </Link>
+            </div>
           </div>
-          <figcaption>
-            New Zealander, currently in Phnom Penh. Move the cursor over the
-            photo.
-          </figcaption>
-        </figure>
+          <figure className="hero-photo">
+            <div className="hero-photo-frame">
+              <Cursor
+                attachToParent
+                variants={{
+                  initial: { scale: 0.3, opacity: 0 },
+                  animate: { scale: 1, opacity: 1 },
+                  exit: { scale: 0.3, opacity: 0 },
+                }}
+                transition={{ ease: "easeInOut", duration: 0.15 }}
+                className="left-12 top-4"
+              >
+                <div className="cursor-follow">
+                  <MouseIcon className="h-6 w-6" />
+                  <span className="cursor-chip">Phnom Penh</span>
+                </div>
+              </Cursor>
+              <img
+                src="/images/profile-hero.png"
+                width={368}
+                height={460}
+                alt="Jules Kitto-Astrop in a black blazer with a pounamu necklace, New Zealand flag behind"
+              />
+              <div className="hero-lens" aria-hidden="true">
+                <ChromaticLensEffect
+                  image={{ src: "/images/profile-hero.png" }}
+                  width="100%"
+                  height="100%"
+                  cursorStyle="none"
+                />
+              </div>
+            </div>
+            <figcaption>Phnom Penh · hover the photo</figcaption>
+          </figure>
+        </div>
       </section>
 
       <section className="band">
