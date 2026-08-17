@@ -255,7 +255,31 @@ export const livedIn: LivedPlace[] = [
   { country: "Netherlands" },
   { country: "New Zealand" },
   { country: "Vietnam" },
-  { country: "Canada" },
+  {
+    country: "Canada",
+    images: [
+      {
+        src: "/images/lived/canada-1.jpg",
+        alt: "Toronto waterfront marina with the CN Tower",
+      },
+      {
+        src: "/images/lived/canada-2.jpg",
+        alt: "Toronto skyline across Lake Ontario, with the CN Tower",
+      },
+      {
+        src: "/images/lived/canada-3.jpg",
+        alt: "The Gooderham Flatiron Building in downtown Toronto",
+      },
+      {
+        src: "/images/lived/canada-4.jpg",
+        alt: "The TORONTO sign at Nathan Phillips Square at dusk",
+      },
+      {
+        src: "/images/lived/canada-5.jpg",
+        alt: "Skating at Nathan Phillips Square with Old City Hall behind",
+      },
+    ],
+  },
   {
     country: "Japan",
     images: [
