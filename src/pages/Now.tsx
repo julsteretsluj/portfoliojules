@@ -74,10 +74,6 @@ export default function Now() {
         <h2>Brain food & personal growth</h2>
         <ul>
           <li>
-            <strong>iPsyO</strong> — Deep-diving into International Psychology
-            Olympiad materials and community discussions.
-          </li>
-          <li>
             <strong>Learning ASL</strong> — Expanding my communication toolkit
             through American Sign Language.
           </li>

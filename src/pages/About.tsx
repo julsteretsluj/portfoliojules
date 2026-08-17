@@ -1,4 +1,5 @@
 import { Globe } from "@/components/ui/globe";
+import { RevealImageList } from "@/components/ui/reveal-images";
 import { education, livedIn, journey, passport } from "../data";
 
 export default function About() {
@@ -56,11 +57,15 @@ export default function About() {
 
       <section className="lived-row reveal from-up">
         <h2>Countries lived & studied in</h2>
-        <ul>
-          {livedIn.map((country) => (
-            <li key={country}>{country}</li>
-          ))}
-        </ul>
+        <p className="lived-hint">
+          Hover a country. Photos will appear here once they’re in.
+        </p>
+        <RevealImageList
+          items={livedIn.map((place) => ({
+            text: place.country,
+            images: place.images,
+          }))}
+        />
       </section>
 
       <section className="edu-wrap">

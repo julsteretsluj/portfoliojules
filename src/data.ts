@@ -244,14 +244,43 @@ export const education = [
   },
 ];
 
-export const livedIn = [
-  "Thailand",
-  "Singapore",
-  "Netherlands",
-  "New Zealand",
-  "Vietnam",
-  "Canada",
-  "Japan",
+export type LivedPlace = {
+  country: string;
+  images?: { src: string; alt: string }[];
+};
+
+export const livedIn: LivedPlace[] = [
+  { country: "Thailand" },
+  { country: "Singapore" },
+  { country: "Netherlands" },
+  { country: "New Zealand" },
+  { country: "Vietnam" },
+  { country: "Canada" },
+  {
+    country: "Japan",
+    images: [
+      {
+        src: "/images/lived/japan-1.jpg",
+        alt: "A narrow Tokyo street packed with vertical signs",
+      },
+      {
+        src: "/images/lived/japan-2.jpg",
+        alt: "Cherry blossoms over a night walkway in Tokyo",
+      },
+      {
+        src: "/images/lived/japan-3.jpg",
+        alt: "Boats on a Tokyo canal under cherry blossoms, with Tokyo Tower beyond",
+      },
+      {
+        src: "/images/lived/japan-4.jpg",
+        alt: "Tokyo at dusk with Mount Fuji and Tokyo Tower",
+      },
+      {
+        src: "/images/lived/japan-5.jpg",
+        alt: "Aerial Tokyo at sunset with Tokyo Tower and Mount Fuji",
+      },
+    ],
+  },
 ];
 
 export const journey = [
