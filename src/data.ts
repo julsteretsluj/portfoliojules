@@ -253,7 +253,31 @@ export const livedIn: LivedPlace[] = [
   { country: "Thailand" },
   { country: "Singapore" },
   { country: "Netherlands" },
-  { country: "New Zealand" },
+  {
+    country: "New Zealand",
+    images: [
+      {
+        src: "/images/lived/new-zealand-2.jpg",
+        alt: "A ferry crossing Waitematā Harbour toward the Auckland waterfront",
+      },
+      {
+        src: "/images/lived/new-zealand-1.jpg",
+        alt: "Aerial Auckland with the Harbour Bridge and Sky Tower",
+      },
+      {
+        src: "/images/lived/new-zealand-3.jpg",
+        alt: "Auckland from a grassy volcanic hill, Sky Tower on the skyline",
+      },
+      {
+        src: "/images/lived/new-zealand-4.jpg",
+        alt: "Auckland Sky Tower at night reflected in the Viaduct Harbour",
+      },
+      {
+        src: "/images/lived/new-zealand-5.jpg",
+        alt: "Auckland CBD at golden hour with the Sky Tower and Rangitoto beyond",
+      },
+    ],
+  },
   { country: "Vietnam" },
   {
     country: "Canada",
