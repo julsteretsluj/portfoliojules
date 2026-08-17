@@ -261,7 +261,7 @@ export default function Home() {
                 Student leader. Event coordinator. Digital builder.
               </span>
               <MorphingText
-                className="hero-morph mx-0 text-left"
+                className="hero-morph mx-0 h-auto max-w-none text-left text-[length:inherit] font-semibold leading-none md:h-auto lg:text-[length:inherit]"
                 texts={[
                   "Student leader",
                   "Event coordinator",
