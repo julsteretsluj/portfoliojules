@@ -103,12 +103,12 @@ function HeroPhoto() {
               className="hero-hover-chip"
               style={{ left: hover.px, top: hover.py }}
             >
-              Phnom Penh
+              jules kitto-astrop
             </div>,
             document.body,
           )
         : null}
-      <figcaption>Phnom Penh · hover the photo</figcaption>
+      <figcaption>jules kitto-astrop · hover the photo</figcaption>
     </figure>
   );
 }
