@@ -670,7 +670,6 @@ main {
 .notebook,
 .takes-list,
 .take-lead,
-.role-index,
 .feature-role,
 .role-stack,
 .connect-band,
@@ -932,24 +931,6 @@ main {
 
 .cta-band .lede,
 .cta-band p {
-  color: var(--muted);
-}
-
-.role-index {
-  list-style: none;
-  margin: 0 auto 2rem;
-  padding: 0;
-}
-
-.role-index li {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 1rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.role-index span {
   color: var(--muted);
 }
 
@@ -1846,8 +1827,7 @@ balloons {
   .journey,
   .passport,
   .passion-masonry,
-  .now-columns,
-  .role-index li {
+  .now-columns {
     grid-template-columns: 1fr;
   }
 

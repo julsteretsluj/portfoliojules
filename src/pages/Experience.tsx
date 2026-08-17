@@ -54,15 +54,6 @@ export default function Experience() {
         </p>
       </header>
 
-      <ol className="role-index" aria-label="All recorded roles">
-        {roles.map((role) => (
-          <li key={`${role.title}-${role.org}`}>
-            <strong>{role.title}</strong>
-            <span>{role.org}</span>
-          </li>
-        ))}
-      </ol>
-
       <article className="feature-role reveal from-left">
         {featured.logo ? (
           <div className="feature-role-logo">
