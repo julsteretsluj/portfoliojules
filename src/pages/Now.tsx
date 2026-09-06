@@ -94,7 +94,11 @@ export default function Now() {
           <ul className="plain-list">
             <li>
               <strong>United Youth Orbis:</strong> Serving as Managing Director,
-              directing strategy, programmes, and day-to-day operations.
+              directing strategy, programmes, and day-to-day operations at{" "}
+              <a href={links.uyo} target="_blank" rel="noreferrer">
+                unitedyorbis.org
+              </a>
+              .
             </li>
             <li>
               <strong>SEAMUN I 2027:</strong> Serving as Secretary-General and

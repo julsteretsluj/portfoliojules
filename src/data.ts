@@ -8,6 +8,7 @@ export const links = {
   seamuns: "https://seamuns.site",
   intermun: "https://intermun.site",
   ydn: "https://youthdiplomacynetwork.org/",
+  uyo: "https://unitedyorbis.org",
 };
 
 export const socials = [
@@ -30,6 +31,10 @@ export const socials = [
   {
     name: "InterMUN",
     href: links.intermun,
+  },
+  {
+    name: "UYO",
+    href: links.uyo,
   },
 ];
 
@@ -104,6 +109,8 @@ export const roles: Role[] = [
     place: "Phnom Penh",
     dates: "Sep 2026 – Present",
     logo: "/images/united-youth-orbis-logo.png",
+    href: links.uyo,
+    hrefLabel: "Visit United Youth Orbis",
     bullets: [
       "Direct strategy and day-to-day operations for a youth-led leadership and diplomacy initiative.",
       "Coordinate programmes, partnerships, and team delivery across events and community work.",

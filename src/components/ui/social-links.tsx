@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+  CirclesFour,
   Cube,
   GlobeHemisphereEast,
   InstagramLogo,
@@ -27,6 +28,7 @@ const ICONS: Record<string, Icon> = {
   SEAMUNs: UsersThree,
   SEAMUN: GlobeHemisphereEast,
   InterMUN: Cube,
+  UYO: CirclesFour,
 };
 
 export function SocialLinks({ socials, className, ...props }: SocialLinksProps) {
