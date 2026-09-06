@@ -93,6 +93,10 @@ export default function Now() {
           </p>
           <ul className="plain-list">
             <li>
+              <strong>United Youth Orbis:</strong> Serving as Managing Director,
+              directing strategy, programmes, and day-to-day operations.
+            </li>
+            <li>
               <strong>SEAMUN I 2027:</strong> Serving as Secretary-General and
               Event Manager, including committee structuring, secretariat tasks,
               and operations.
@@ -116,8 +120,8 @@ export default function Now() {
           <p>When I am not managing events, I am coding the infrastructure to run them.</p>
           <ul className="plain-list">
             <li>
-              <strong>InterMUN:</strong> Building a custom full-stack conference
-              platform from scratch at{" "}
+              <strong>InterMUN:</strong> Founding and building a custom full-stack
+              conference platform from scratch at{" "}
               <a href={links.intermun} target="_blank" rel="noreferrer">
                 intermun.site
               </a>{" "}

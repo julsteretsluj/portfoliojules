@@ -27,6 +27,10 @@ export const socials = [
     name: "SEAMUN",
     href: links.seamun,
   },
+  {
+    name: "InterMUN",
+    href: links.intermun,
+  },
 ];
 
 export const nav = [
@@ -95,6 +99,18 @@ export type Role = {
 
 export const roles: Role[] = [
   {
+    title: "Managing Director",
+    org: "United Youth Orbis",
+    place: "Phnom Penh",
+    dates: "Sep 2026 – Present",
+    logo: "/images/united-youth-orbis-logo.png",
+    bullets: [
+      "Direct strategy and day-to-day operations for a youth-led leadership and diplomacy initiative.",
+      "Coordinate programmes, partnerships, and team delivery across events and community work.",
+      "Build systems that keep programmes accountable, on schedule, and accessible to young people.",
+    ],
+  },
+  {
     title: "Secretary-General",
     org: "SEAMUN I 2027",
     place: "Bangkok / Phnom Penh",
@@ -135,6 +151,20 @@ export const roles: Role[] = [
       "Design and execute regional youth diplomacy and educational events.",
       "Coordinate workflows across logistics, scheduling, and stakeholder communication.",
       "Support partner alignment to ensure on-time event delivery and consistent attendee experience.",
+    ],
+  },
+  {
+    title: "Founder",
+    org: "InterMUN",
+    place: "Digital Product",
+    dates: "2026 – Present",
+    logo: "/images/intermun-logo.png",
+    href: links.intermun,
+    hrefLabel: "Visit InterMUN",
+    bullets: [
+      "Founded InterMUN, a custom full-stack platform for conference operations.",
+      "Design delegate and secretariat workflows so teams can run events with clearer systems.",
+      "Build and iterate the product at intermun.site.",
     ],
   },
   {
