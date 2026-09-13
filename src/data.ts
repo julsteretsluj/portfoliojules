@@ -9,6 +9,7 @@ export const links = {
   intermun: "https://intermun.site",
   ydn: "https://youthdiplomacynetwork.org/",
   uyo: "https://unitedyorbis.org",
+  yac: "https://youthactionconference.vercel.app",
 };
 
 export const socials = [
@@ -172,6 +173,19 @@ export const roles: Role[] = [
       "Founded InterMUN, a custom full-stack platform for conference operations.",
       "Design delegate and secretariat workflows so teams can run events with clearer systems.",
       "Build and iterate the product at intermun.site.",
+    ],
+  },
+  {
+    title: "Co-Founder",
+    org: "Youth Action Conference",
+    place: "Virtual / Global",
+    dates: "2026 – Present",
+    logo: "/images/youth-action-conference-logo.png",
+    href: links.yac,
+    hrefLabel: "Visit Youth Action Conference",
+    bullets: [
+      "Co-founded a global virtual conference centred on youth perspectives and action.",
+      "Shape programme direction, partnerships, and delivery for a worldwide online audience.",
     ],
   },
   {
