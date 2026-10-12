@@ -38,13 +38,6 @@ function HeroPhoto() {
     h: number;
   } | null>(null);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("has-hero-photo-hover", Boolean(hover));
-    return () => {
-      document.documentElement.classList.remove("has-hero-photo-hover");
-    };
-  }, [hover]);
-
   const track = (event: PointerEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
     setHover({
