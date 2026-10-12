@@ -1,7 +1,15 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { Macbook } from "@/components/ui/animated-3d-mac-book-air";
-import { links, skills, toolkit, toolkitTags } from "../data";
+import {
+  cefrLabels,
+  cefrLevels,
+  languages,
+  links,
+  skills,
+  toolkit,
+  toolkitTags,
+} from "../data";
 import { gsap, prefersReducedMotion, registerMotion } from "../motion/setup";
 
 registerMotion();
@@ -148,6 +156,44 @@ export default function Skills() {
           {toolkitTags.map((tag) => (
             <li key={tag}>{tag}</li>
           ))}
+        </ul>
+      </section>
+
+      <section className="languages reveal from-up">
+        <div className="languages-head">
+          <p className="eyebrow">Languages</p>
+          <h2>What I speak, and what I’m still learning</h2>
+          <p className="languages-scale">Levels follow the CEFR scale, A1 to C2.</p>
+        </div>
+        <ul className="language-list">
+          {languages.map(({ name, level, note }) => {
+            const filled = cefrLevels.indexOf(level) + 1;
+            return (
+              <li className="language-row" key={name}>
+                <div className="language-name">
+                  <h3>{name}</h3>
+                  <p>{note}</p>
+                </div>
+                <div className="language-level">
+                  <span
+                    className="language-dots"
+                    role="img"
+                    aria-label={`${level}, ${filled} of ${cefrLevels.length}`}
+                  >
+                    {cefrLevels.map((step, i) => (
+                      <span
+                        key={step}
+                        className={`language-dot${i < filled ? " is-filled" : ""}`}
+                      />
+                    ))}
+                  </span>
+                  <span className="language-label">
+                    <strong>{level}</strong> {cefrLabels[level]}
+                  </span>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </section>
     </div>

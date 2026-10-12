@@ -263,6 +263,25 @@ export const skills = [
 export const toolkit = ["Cursor AI", "Gemini", "ClickUp", "Canva", "Figma", "Google Workspace"];
 export const toolkitTags = ["Planning", "Documentation", "Design", "Execution"];
 
+export const cefrLevels = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
+
+export type CefrLevel = (typeof cefrLevels)[number];
+
+export const cefrLabels: Record<CefrLevel, string> = {
+  A1: "Beginner",
+  A2: "Elementary",
+  B1: "Intermediate",
+  B2: "Upper intermediate",
+  C1: "Advanced",
+  C2: "Proficient",
+};
+
+export const languages: { name: string; level: CefrLevel; note: string }[] = [
+  { name: "English", level: "C2", note: "Native-level — the language I lead, write, and chair in." },
+  { name: "American Sign Language", level: "A1", note: "Learning the basics and fingerspelling." },
+  { name: "Dutch", level: "A1", note: "Everyday words and simple phrases." },
+];
+
 export const education = [
   {
     grades: "Grades 9–11",
